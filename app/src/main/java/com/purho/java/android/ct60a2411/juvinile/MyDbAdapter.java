@@ -9,6 +9,9 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+//note to self: THE DB GOES TO
+// data/data/APP_Name/databases/DATABASE_NAME
+
 public class MyDbAdapter {
 
     myDbHelper myhelper;
@@ -55,6 +58,7 @@ public class MyDbAdapter {
         contentValues.put(myDbHelper.EVENTPLANNEDEND, data[3]);
         contentValues.put(myDbHelper.MINAGE, data[4]);
         contentValues.put(myDbHelper.MAXAGE, data[5]);
+        contentValues.put(myDbHelper.ACTIVE, data[6]);
 
         long insert = dbb.insert(myDbHelper.TABLE_EVENT, null , contentValues);
         return insert;
@@ -81,7 +85,9 @@ public class MyDbAdapter {
 
     //now this is for reading. should be interesting.
     //below for table juvinile, need to make this generic for joins
-    /*public String getJuvinileData()
+    /*
+    public String getJuvinileData()
+
     {
         SQLiteDatabase db = myhelper.getWritableDatabase();
         String[] columns = {myDbHelper.UID,myDbHelper.TEXT,myDbHelper.TEXT2};
@@ -129,12 +135,12 @@ public class MyDbAdapter {
     //DELETE
 
     //need many of these, or preferably make this delete a more generic taking only a fully prepared sql as parameter
-    public  int delete(String TABLE_NAME,String IDFIELD, Integer ID) //poistetaan id ID taulusta TABLE_NAME
+    public  int delete(String[] ID) //poistetaan id ID taulusta TABLE_NAME
     {
         SQLiteDatabase db = myhelper.getWritableDatabase();
-        String TABLE_NAME = TABLE_NAME;
 
-        int count =db.delete(myDbHelper.+ TABLE_NAME ,myDbHelper.+ IDFIELD + " = ?",ID);
+
+        int count =db.delete(myDbHelper.TABLE_JUVINILE ,myDbHelper.JUVINILEID + " = ?", ID);
         return  count;
     }
 
@@ -153,17 +159,16 @@ public class MyDbAdapter {
         return count; //paluukoodi jee
     }
 
-    static class myDbHelper extends SQLiteOpenHelper
-    {
-        private static final String DATABASE_NAME = "playtodella";    // Database Name
-        private static final int DATABASE_Version = 1;    // Database Version
+    static class myDbHelper extends SQLiteOpenHelper {
+        private static final String DATABASE_NAME = "playtodella3";    // Database Name
+        private static final int DATABASE_Version = 2;    // Database Version
 
         //table juvinile
         private static final String TABLE_JUVINILE = "juvinile";   // table juvinile as in nuorisotila
-        private static final String JUVINILEID="juvinileid";     // col id (Primary Key) (INTEGER PRIMARY KEY AUTOINCREMENT)
+        private static final String JUVINILEID = "juvinileid";     // col id (Primary Key) (INTEGER PRIMARY KEY AUTOINCREMENT)
         private static final String JUVINILENAME = "name";    //col name for the juvinile varchar(50)
-        private static final String ADDRESS= "address";    //col address line varchar(50)
-        private static final String CITY= "city";    //col city varchar(20)
+        private static final String ADDRESS = "address";    //col address line varchar(50)
+        private static final String CITY = "city";    //col city varchar(20)
         private static final String JDBTIME = "dbtime"; // col time when created timestamp
         private static final String JDBCHANGE = "dbchange"; // col time when changed timestamp
 
@@ -179,6 +184,7 @@ public class MyDbAdapter {
         private static final String MINAGE = "minage";   // col minimum age of participants int
         private static final String MAXAGE = "maxage";   // col maximum age of participants int
         private static final String PARTICIPANTS_COUNT = "participants";   // col number of participants int
+        private static final String ACTIVE = "active";   // col active yes/no
         private static final String EDBTIME = "dbtime"; // col time when created timestamp
         private static final String EDBCHANGE = "dbchange"; // col time when changed timestamp
 
@@ -193,82 +199,83 @@ public class MyDbAdapter {
         private static final String FDBCHANGE = "dbchange"; // col time when changed timestamp
 
 
-
-            //sentences to handle table juvinile
-            private static final String CREATE_TABLE_JUVINILE =
-                    "CREATE TABLE " + TABLE_JUVINILE + " ("
-                        + JUVINILEID +" INTEGER PRIMARY KEY AUTOINCREMENT, "
-                        + JUVINILENAME + " VARCHAR(20),"
-                        + ADDRESS + " VARCHAR(50), "
-                        + CITY + " VARCHAR(20),"
+        //sentences to handle table juvinile
+        private static final String CREATE_TABLE_JUVINILE =
+                "CREATE TABLE " + TABLE_JUVINILE + " ("
+                        + JUVINILEID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + JUVINILENAME + " TEXT,"
+                        + ADDRESS + " TEXT, "
+                        + CITY + " TEXT,"
                         + JDBTIME + " DATETIME DEFAULT CURRENT_TIMESTAMP,"
                         + JDBCHANGE + " DATETIME DEFAULT CURRENT_TIMESTAMP"
-                        +");";
-            private static final String DROP_TABLE ="DROP TABLE IF EXISTS "+TABLE_JUVINILE;
+                        + ");";
+        private static final String DROP_TABLE_JUVINILE = "DROP TABLE IF EXISTS " + TABLE_JUVINILE;
 
-            //sentences to handle table event
-            private static final String CREATE_TABLE_EVENT =
-                    "CREATE TABLE " + TABLE_EVENT + " ("
-                            + EVENTID +" INTEGER PRIMARY KEY AUTOINCREMENT, "
-                            + EJUVINILEID + " INTEGER NOT NULL,"
-                            + EVENTNAME + " VARCHAR(50),"
-                            + EVENTPLANNEDSTART + " DATETIME NOT NULL), "
-                            + EVENTPLANNEDEND + " DATETIME NOT NULL), " //could be not null as could the previous
-                            + EVENTSTART + " DATETIME DEFAULT NULL), "
-                            + EVENTEND + " DATETIME DEFAULT NULL),"
-                            + MINAGE + " INTEGER), "
-                            + MAXAGE + " INTEGER), "
-                            + PARTICIPANTS_COUNT + " INTEGER DEFAULT 0), "
-                            + EDBTIME + " DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                            + EDBCHANGE + " DATETIME DEFAULT CURRENT_TIMESTAMP"
-                            +");";
-            private static final String DROP_TABLE ="DROP TABLE IF EXISTS "+TABLE_EVENT;
+        //sentences to handle table event
+        private static final String CREATE_TABLE_EVENT =
+                "CREATE TABLE " + TABLE_EVENT + " ("
+                        + EVENTID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + EJUVINILEID + " INTEGER NOT NULL, "
+                        + EVENTNAME + " TEXT, "
+                        + EVENTPLANNEDSTART + " DATETIME NOT NULL, "
+                        + EVENTPLANNEDEND + " DATETIME NOT NULL, " //could be not null as could the previous
+                        + EVENTSTART + " DATETIME DEFAULT NULL, "
+                        + EVENTEND + " DATETIME DEFAULT NULL,"
+                        + MINAGE + " INTEGER, "
+                        + MAXAGE + " INTEGER, "
+                        + PARTICIPANTS_COUNT + " INTEGER DEFAULT 0, "
+                        + ACTIVE + " TEXT, "
+                        + EDBTIME + " DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                        + EDBCHANGE + " DATETIME DEFAULT CURRENT_TIMESTAMP"
+                        + ");";
+        private static final String DROP_TABLE_EVENT = "DROP TABLE IF EXISTS " + TABLE_EVENT;
 
-            //sentences to handle table feedback
-            private static final String CREATE_TABLE_FEEDBACK =
-                    "CREATE TABLE " + TABLE_FEEDBACK + " ("
-                            + FEEDBACKID +" INTEGER PRIMARY KEY AUTOINCREMENT, "
-                            + JEVENTID + " INTEGER NOT NULL,"
-                            + GRADE + " INTEGER,"
-                            + FEEDBACK + " VARCHAR(1000), "
-                            + PARTICIPANT+ " VARCHAR(30) DEFAULT 'Anonymous', "
-                            + FDBTIME + " DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                            + FDBCHANGE + " DATETIME DEFAULT CURRENT_TIMESTAMP"
-                            +");";
-            private static final String DROP_TABLE ="DROP TABLE IF EXISTS "+TABLE_FEEDBACK;
+        //sentences to handle table feedback
+        private static final String CREATE_TABLE_FEEDBACK =
+                "CREATE TABLE " + TABLE_FEEDBACK + " ("
+                        + FEEDBACKID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + JEVENTID + " INTEGER NOT NULL,"
+                        + GRADE + " INTEGER,"
+                        + FEEDBACK + " TEXT, "
+                        + PARTICIPANT + " TEXT DEFAULT 'Anonymous', "
+                        + FDBTIME + " DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                        + FDBCHANGE + " DATETIME DEFAULT CURRENT_TIMESTAMP "
+                        + ");";
+        private static final String DROP_TABLE_FEEDBACK = "DROP TABLE IF EXISTS " + TABLE_FEEDBACK;
 
+        //**************************************************************************************
+        private Context context;
 
-            private Context context;
+        public myDbHelper(Context context) {
+            super(context, DATABASE_NAME, null, DATABASE_Version);
+            this.context = context;
+        }
 
-            public myDbHelper(Context context) {
-                super(context, DATABASE_NAME, null, DATABASE_Version);
-                this.context=context;
+        public void onCreate(SQLiteDatabase db) {
+
+            try {
+                db.execSQL(CREATE_TABLE_JUVINILE);
+                db.execSQL(CREATE_TABLE_EVENT);
+                db.execSQL(CREATE_TABLE_FEEDBACK);
+                //System.out.println("tehtiinkohan jotain");
+            } catch (Exception e) {
+                Message.message(context, "" + e);
             }
+        }
 
-            public void onCreate(SQLiteDatabase db) {
-
-                try {
-                    db.execSQL(CREATE_TABLE_JUVINILE);
-                    db.execSQL(CREATE_TABLE_EVENT);
-                    db.execSQL(CREATE_TABLE_FEEDBACK);
-                    //System.out.println("tehtiinkohan jotain");
-                } catch (Exception e) {
-                    Message.message(context,""+e);
-                }
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            try {
+                Message.message(context, "OnUpgrade");
+                db.execSQL(DROP_TABLE_JUVINILE);
+                db.execSQL(DROP_TABLE_EVENT);
+                db.execSQL(DROP_TABLE_FEEDBACK);
+                onCreate(db);
+            } catch (Exception e) {
+                Message.message(context, "" + e);
             }
-
-            @Override
-            public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-                try {
-                    Message.message(context,"OnUpgrade");
-                    db.execSQL(DROP_TABLE);
-                    onCreate(db);
-                }catch (Exception e) {
-                    Message.message(context,""+e);
-                }
-            }
+        }
 
 
-
-
+    }
 }

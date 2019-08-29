@@ -23,9 +23,9 @@ public class AdminTools extends AppCompatActivity {
     public void populateInit(View v) {
 
         String[] juviniledata = new String[3];
-        String[] eventdata = new String[6];
+        String[] eventdata = new String[7];
         String[] feedbackdata = new String[4];
-
+        System.out.println("populateInit1");
 
         //String name=juviniledata[0];
         //String address=juviniledata[1];
@@ -45,6 +45,7 @@ public class AdminTools extends AppCompatActivity {
         //String plannedEnd=data[3];
         //String minAge=data[4];
         //String maxAge=data[5];
+        //String active=data[6];
 
         //First Event
 
@@ -59,7 +60,7 @@ public class AdminTools extends AppCompatActivity {
     }
 
     public void insertInitJuv(String[] data){
-
+        //System.out.println("insert1");
         long id = helper.insertDataJuvinile(data);
         if(id<=0)
         {
@@ -72,6 +73,7 @@ public class AdminTools extends AppCompatActivity {
             //Name.setText("");
             //Pass.setText("");
         }
+
 
     }
 
