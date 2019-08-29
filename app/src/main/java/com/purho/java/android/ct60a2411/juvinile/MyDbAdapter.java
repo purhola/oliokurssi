@@ -24,9 +24,9 @@ public class MyDbAdapter {
     //here data needs to be name, address, city
     public long insertDataJuvinile(String[] data)
     {
-        //String name=data[1];
-        //String address=data[2];
-        //String city=data[3];
+        //String name=data[0];
+        //String address=data[1];
+        //String city=data[2];
 
         SQLiteDatabase dbb = myhelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -150,7 +150,7 @@ public class MyDbAdapter {
         contentValues.put(myDbHelper.JUVINILENAME,newText);
         String[] whereArgs= {oldText};
         int count =db.update(myDbHelper.TABLE_JUVINILE,contentValues, myDbHelper.JUVINILENAME+" = ?",whereArgs );
-        return count; //lmoittaa montako rivia paivitetty.. jee..
+        return count; //paluukoodi jee
     }
 
     static class myDbHelper extends SQLiteOpenHelper
