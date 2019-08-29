@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".AdminTools">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMaster"
+        android:layout_width="319dp"
+        android:layout_height="318dp"
+        android:onClick="testReading"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.788" />
+
     <Button
         android:id="@+id/btnPopuloi"
         android:layout_width="wrap_content"
@@ -23,7 +35,8 @@
         android:id="@+id/button9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tyhjennä"
+        android:onClick="testReading"
+        android:text="HaeJuvinile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.12"
@@ -33,12 +46,14 @@
 
     <TextView
         android:id="@+id/testiLista"
-        android:layout_width="223dp"
-        android:layout_height="258dp"
+        android:layout_width="245dp"
+        android:layout_height="170dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.727" />
+        app:layout_constraintVertical_bias="0.061" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

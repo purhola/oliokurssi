@@ -116,12 +116,14 @@ public class MyDbAdapter {
     //lets fetch the list of places - need to make one for events, which would be combining
     //also need one for feedbacks concerning one event at  time
     // TODO find a way to store results of multiple columns
-    public ArrayList<String> getJuvinileList() //the select query here as string parameter?
+    public ArrayList<Juvinile> getJuvinileList() //the select query here as string parameter?
     {
 
         //list for storing the results
-        ArrayList<String> juvinilesList = new ArrayList<String>();
+        ArrayList<Juvinile> juvinilesList = new ArrayList<Juvinile>();
         String name=""; //could be also location
+        String location=""; //could be also location
+        String address="";
         String selectQuery = "SELECT * FROM " + myDbHelper.TABLE_JUVINILE; //suppose this coulb be generic and provided via string?
 
         SQLiteDatabase db = myhelper.getWritableDatabase();
@@ -129,9 +131,17 @@ public class MyDbAdapter {
         //go through the whole table
         if(c.moveToFirst()) {
             do {
+                Juvinile tempjuvi = new Juvinile();
                 name=c.getString(c.getColumnIndex(myDbHelper.JUVINILENAME));
+                location=c.getString(c.getColumnIndex(myDbHelper.CITY));
+                address=c.getString(c.getColumnIndex(myDbHelper.ADDRESS));
+                //TODO how are we going to store the values separately?
+                tempjuvi.setAddress(address);
+                tempjuvi.setName(name);
+                tempjuvi.setCity(location);
+
                 //add the row to the list
-                juvinilesList.add(name);
+                juvinilesList.add(tempjuvi);
             } while (c.moveToNext());
             Log.d("array",juvinilesList.toString());
         }

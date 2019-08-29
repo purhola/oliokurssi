@@ -4,26 +4,26 @@ import android.content.Context;
 
 public class SQLOperations {
 
-    MyDbAdapter helper= new MyDbAdapter(this);
+    //MyDbAdapter helper= new MyDbAdapter(this);
 
     //INSERTIT
 
-    public long insertJuv(String[] data){
+    //public long insertJuv(String[] data){
         //System.out.println("insert1");
-        long id = helper.insertDataJuvinile(data);
-        return id;
-    }
+    //    long id = helper.insertDataJuvinile(data);
+    //    return id;
+   // }
 
-    public long insertEvent(String[] data){
+    //public long insertEvent(String[] data){
 
-        long id = helper.insertDataEvents(data);
-        return id;
-    }
+        //long id = helper.insertDataEvents(data);
+        //return id;
+    //}
 
-    public long insertFeedB(String[] data){
+    //public long insertFeedB(String[] data){
 
-        long id = helper.insertDataFeedback(data);
-        return id;
-    }
+      //  long id = helper.insertDataFeedback(data);
+       // return id;
+   // }
 
 }
