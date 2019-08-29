@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class AdminTools extends AppCompatActivity {
 
@@ -17,6 +20,22 @@ public class AdminTools extends AppCompatActivity {
 
         helper = new MyDbAdapter(this);
 
+
+
+
+    }
+
+    public void testReading(View v) {
+
+        TextView juviListStr;
+        juviListStr = (TextView) findViewById(R.id.testiLista);
+
+        ArrayList<String> juvinileArray = new ArrayList<>();
+
+        juvinileArray = helper.getJuvinileList();
+        juviListStr.setText("");
+        for (int i = 0; i < juvinileArray.size(); i++){
+            juviListStr.setText(juviListStr.getText().toString()+", "+juvinileArray.get(i));
 
     }
 
@@ -48,6 +67,11 @@ public class AdminTools extends AppCompatActivity {
         //String active=data[6];
 
         //First Event
+        eventdata[0]="1";eventdata[1]="Ykskemut";eventdata[2]="2109-08-29 14:30:00";eventdata[3]="2109-08-29 16:30:00";eventdata[4]="10";eventdata[5]="12";eventdata[6]="NO";
+        insertInitEvent(eventdata);
+        //Second event
+        eventdata[0]="1";eventdata[1]="Kakskemut";eventdata[2]="2109-08-30 16:30:00";eventdata[3]="2109-08-29 22:30:00";eventdata[4]="15";eventdata[5]="18";eventdata[6]="NO";
+        insertInitEvent(eventdata);
 
 
         //String jeventid=data[0];
@@ -55,6 +79,12 @@ public class AdminTools extends AppCompatActivity {
         //String feedback=data[2];
         //String participant=data[3];
 
+        //First feedback
+        feedbackdata[0]="1";feedbackdata[1]="2";feedbackdata[2]="Ihan totaalista kuraa";feedbackdata[3]="Anon";
+        insertInitFeedB(feedbackdata);
+        //Second feedback
+        feedbackdata[0]="2";feedbackdata[1]="5";feedbackdata[2]="Ihan mehua";feedbackdata[3]= null;
+        insertInitFeedB(feedbackdata);
 
 
     }
@@ -64,12 +94,12 @@ public class AdminTools extends AppCompatActivity {
         long id = helper.insertDataJuvinile(data);
         if(id<=0)
         {
-            Message.message(getApplicationContext(),"Insertion Unsuccessful");
+            Message.message(getApplicationContext(),"Juvinile Insertion Unsuccessful");
             //Name.setText("");
             //Pass.setText("");
         } else
         {
-            Message.message(getApplicationContext(),"Insertion Successful");
+            Message.message(getApplicationContext(),"Juvinile Insertion Successful");
             //Name.setText("");
             //Pass.setText("");
         }
@@ -82,12 +112,12 @@ public class AdminTools extends AppCompatActivity {
         long id = helper.insertDataEvents(data);
         if(id<=0)
         {
-            Message.message(getApplicationContext(),"Insertion Unsuccessful");
+            Message.message(getApplicationContext(),"Event Insertion Unsuccessful");
             //Name.setText("");
             //Pass.setText("");
         } else
         {
-            Message.message(getApplicationContext(),"Insertion Successful");
+            Message.message(getApplicationContext(),"Event Insertion Successful");
             //Name.setText("");
             //Pass.setText("");
         }
@@ -99,12 +129,12 @@ public class AdminTools extends AppCompatActivity {
         long id = helper.insertDataFeedback(data);
         if(id<=0)
         {
-            Message.message(getApplicationContext(),"Insertion Unsuccessful");
+            Message.message(getApplicationContext(),"Feedback Insertion Unsuccessful");
             //Name.setText("");
             //Pass.setText("");
         } else
         {
-            Message.message(getApplicationContext(),"Insertion Successful");
+            Message.message(getApplicationContext(),"Feedback Insertion Successful");
             //Name.setText("");
             //Pass.setText("");
         }

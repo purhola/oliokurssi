@@ -12,6 +12,13 @@ import java.util.ArrayList;
 //note to self: THE DB GOES TO
 // data/data/APP_Name/databases/DATABASE_NAME
 
+//TODO stringsql
+//compileStatement()
+//Compiles an SQL statement into a reusable pre-compiled statement object.
+//Use this method as below
+//compileStatement(String sql)
+//Pass sql statement as a parameter in string the format.
+
 public class MyDbAdapter {
 
     myDbHelper myhelper;

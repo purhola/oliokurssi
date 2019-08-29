@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminTools"></activity>
+        <activity android:name=".FeedBackActivity"></activity>
+        <activity android:name=".EventActive" />
+        <activity android:name=".AdminTools" />
         <activity android:name=".EventData" />
         <activity android:name=".MasterData" />
         <activity android:name=".MainActivity">
