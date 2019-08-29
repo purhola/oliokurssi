@@ -43,33 +43,28 @@ public class AdminTools extends AppCompatActivity implements MyRecyclerViewAdapt
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+        System.out.println("ja positiohan on" + position);
+        //TODO how can we get to the line clicked!!! need the id from there at least.. best would be if we could just move to a new place (ylläpito) directly
+
     }
 
     public void testReading(View v) {
-
-        TextView juviListStr;
-        juviListStr = (TextView) findViewById(R.id.testiLista);
-
+        //array for the juviline objects
         ArrayList<Juvinile> juvinileArray = new ArrayList<Juvinile>();
-
+        //temp array for displaying the juviline data
         ArrayList<String> tesArray = new ArrayList<>();
-        //tesArray.add("joopatijoopajoo");
-
+        //temp string for filling the tesArray
         String tesArrayFill="";
 
         juvinileArray = helper.getJuvinileList();
 
-        //TODO kattelepa tasta eteenpain
-        juviListStr.setText("");
-
+        //fill the array
         for (Juvinile tempjuvi:juvinileArray){
-            juviListStr.setText(juviListStr.getText().toString()    + "\n" +
-            tempjuvi.getName() +" " + tempjuvi.getCity() +" "+ tempjuvi.getAddress());
             tesArrayFill=tempjuvi.getName() +" " + tempjuvi.getCity() +" "+ tempjuvi.getAddress();
             tesArray.add(tesArrayFill);
         }
 
-        // set up the RecyclerView
+        // set up the RecyclerView and display the results
         RecyclerView recyclerView = findViewById(R.id.rvMaster);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MyRecyclerViewAdapter(this, tesArray);

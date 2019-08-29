@@ -121,8 +121,9 @@ public class MyDbAdapter {
 
         //list for storing the results
         ArrayList<Juvinile> juvinilesList = new ArrayList<Juvinile>();
-        String name=""; //could be also location
-        String location=""; //could be also location
+        Integer juvilineID;
+        String name="";
+        String location=""; //could be also city
         String address="";
         String selectQuery = "SELECT * FROM " + myDbHelper.TABLE_JUVINILE; //suppose this coulb be generic and provided via string?
 
@@ -132,15 +133,20 @@ public class MyDbAdapter {
         if(c.moveToFirst()) {
             do {
                 Juvinile tempjuvi = new Juvinile();
+
+                //read the db
+                juvilineID=c.getInt(c.getColumnIndex(myDbHelper.JUVINILEID));
                 name=c.getString(c.getColumnIndex(myDbHelper.JUVINILENAME));
                 location=c.getString(c.getColumnIndex(myDbHelper.CITY));
                 address=c.getString(c.getColumnIndex(myDbHelper.ADDRESS));
-                //TODO how are we going to store the values separately?
+
+                //Assign the values to juviline object
+                tempjuvi.setJuvinileID(juvilineID);
                 tempjuvi.setAddress(address);
                 tempjuvi.setName(name);
                 tempjuvi.setCity(location);
 
-                //add the row to the list
+                //add the object to the list
                 juvinilesList.add(tempjuvi);
             } while (c.moveToNext());
             Log.d("array",juvinilesList.toString());

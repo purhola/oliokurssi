@@ -2,14 +2,25 @@ package com.purho.java.android.ct60a2411.juvinile;
 
 class Juvinile {
 
+    private Integer juvinileID;
     private String name;
     private String city;
+    private String address;
+
+    public void Juvinile(){
+        juvinileID=0;
+        name="";
+        city="";
+        address="";
+
+    }
+
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name;
     }
 
@@ -29,6 +40,11 @@ class Juvinile {
         this.address = address;
     }
 
-    private String address;
+    public Integer getJuvinileID() {
+        return juvinileID;
+    }
 
+    public void setJuvinileID(Integer juvinileID) {
+        this.juvinileID = juvinileID;
+    }
 }
