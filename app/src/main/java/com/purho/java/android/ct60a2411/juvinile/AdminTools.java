@@ -53,7 +53,9 @@ public class AdminTools extends AppCompatActivity implements MyRecyclerViewAdapt
         ArrayList<Juvinile> juvinileArray = new ArrayList<Juvinile>();
 
         ArrayList<String> tesArray = new ArrayList<>();
-        tesArray.add("joopatijoopajoo");
+        //tesArray.add("joopatijoopajoo");
+
+        String tesArrayFill="";
 
         juvinileArray = helper.getJuvinileList();
 
@@ -63,6 +65,8 @@ public class AdminTools extends AppCompatActivity implements MyRecyclerViewAdapt
         for (Juvinile tempjuvi:juvinileArray){
             juviListStr.setText(juviListStr.getText().toString()    + "\n" +
             tempjuvi.getName() +" " + tempjuvi.getCity() +" "+ tempjuvi.getAddress());
+            tesArrayFill=tempjuvi.getName() +" " + tempjuvi.getCity() +" "+ tempjuvi.getAddress();
+            tesArray.add(tesArrayFill);
         }
 
         // set up the RecyclerView
