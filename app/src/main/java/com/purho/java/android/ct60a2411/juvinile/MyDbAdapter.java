@@ -333,7 +333,7 @@ public class MyDbAdapter {
     public JuvinileEvent getSingleEvent(Integer e_eventid) {
 
         //Variables for storing the results
-
+        String[] s_eventid={Integer.toString(e_eventid)};
         Integer eventid;
         Integer juvilineid;
         String juvilinename = "";
@@ -363,10 +363,10 @@ public class MyDbAdapter {
                 myDbHelper.EVENTEND +
                 " FROM " + myDbHelper.TABLE_JUVINILE + ", " + myDbHelper.TABLE_EVENT +
                 " WHERE " + myDbHelper.TABLE_JUVINILE + "." + myDbHelper.JUVINILEID + " = " + myDbHelper.TABLE_EVENT + "." + myDbHelper.EJUVINILEID +
-                " AND " + myDbHelper.EVENTID + " = " + e_eventid;
+                " AND " + myDbHelper.EVENTID + " = ?";
 
         SQLiteDatabase db = myhelper.getWritableDatabase();
-        Cursor c = db.rawQuery(selectQuery, null);
+        Cursor c = db.rawQuery(selectQuery, s_eventid);
 
         //go through the whole table
         JuvinileEvent tempevent = null;
@@ -436,6 +436,19 @@ public class MyDbAdapter {
         return count; //paluukoodi jee
     }
 
+    public int updateJuvinileEventDetails(Integer event_id,String column,String new_value)
+    {
+        SQLiteDatabase db = myhelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(column,new_value);
+        contentValues.put(myDbHelper.EDBCHANGE, "DATETIME(TIMESTAMP, 'localtime')");
+        String[] whereArgs= {Integer.toString(event_id)};
+        int count =db.update(myDbHelper.TABLE_EVENT,contentValues, myDbHelper.EVENTID+" = ?",whereArgs );
+        return count; //paluukoodi jee
+
+    }
+
+
     static class myDbHelper extends SQLiteOpenHelper {
         private static final String DATABASE_NAME = "playtodella3";    // Database Name
         private static final int DATABASE_Version = 2;    // Database Version
@@ -483,8 +496,8 @@ public class MyDbAdapter {
                         + JUVINILENAME + " TEXT,"
                         + ADDRESS + " TEXT, "
                         + CITY + " TEXT,"
-                        + JDBTIME + " DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                        + JDBCHANGE + " DATETIME DEFAULT CURRENT_TIMESTAMP"
+                        + JDBTIME + " DATETIME DEFAULT DATETIME(TIMESTAMP, 'localtime'),"
+                        + JDBCHANGE + " DATETIME DEFAULT DATETIME(TIMESTAMP, 'localtime')"
                         + ");";
         private static final String DROP_TABLE_JUVINILE = "DROP TABLE IF EXISTS " + TABLE_JUVINILE;
 
@@ -502,8 +515,8 @@ public class MyDbAdapter {
                         + MAXAGE + " INTEGER, "
                         + PARTICIPANTS_COUNT + " INTEGER DEFAULT 0, "
                         + ACTIVE + " TEXT, "
-                        + EDBTIME + " DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                        + EDBCHANGE + " DATETIME DEFAULT CURRENT_TIMESTAMP"
+                        + EDBTIME + " DATETIME DEFAULT DATETIME(TIMESTAMP, 'localtime'),"
+                        + EDBCHANGE + " DATETIME DEFAULT DATETIME(TIMESTAMP, 'localtime')"
                         + ");";
         private static final String DROP_TABLE_EVENT = "DROP TABLE IF EXISTS " + TABLE_EVENT;
 
@@ -515,8 +528,8 @@ public class MyDbAdapter {
                         + GRADE + " INTEGER,"
                         + FEEDBACK + " TEXT, "
                         + PARTICIPANT + " TEXT DEFAULT 'Anonymous', "
-                        + FDBTIME + " DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                        + FDBCHANGE + " DATETIME DEFAULT CURRENT_TIMESTAMP "
+                        + FDBTIME + " DATETIME DEFAULT DATETIME(TIMESTAMP, 'localtime')"
+                        + FDBCHANGE + " DATETIME DEFAULT DATETIME(TIMESTAMP, 'localtime') "
                         + ");";
         private static final String DROP_TABLE_FEEDBACK = "DROP TABLE IF EXISTS " + TABLE_FEEDBACK;
 

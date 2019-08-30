@@ -3,6 +3,7 @@ package com.purho.java.android.ct60a2411.juvinile;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -11,7 +12,17 @@ import java.util.Scanner;
 public class ViewSingleEventActivity extends AppCompatActivity {
 
     MyDbAdapter helper;
-    JuvinileEvent jevent= new JuvinileEvent();
+    JuvinileEvent jevent;
+
+
+    TextView tveventplace;
+    EditText eteventname;
+    EditText etplannedstart;
+    EditText etplannedend;
+    EditText etminage;
+    EditText etmaxage;
+    EditText etparticcount;
+    Integer eventid;
 
 
     @Override
@@ -23,8 +34,13 @@ public class ViewSingleEventActivity extends AppCompatActivity {
 
         //This is all about retracting the juvinile-eventid in order to fetch correct data.
         String toparse;
-        Integer eventid;
-
+        tveventplace= findViewById(R.id.tvPlace);
+        eteventname= findViewById(R.id.etEventName);
+        etplannedstart= findViewById(R.id.etStart);
+        etplannedend= findViewById(R.id.etEnd);
+        etminage= findViewById(R.id.etMinAge);
+        etmaxage= findViewById(R.id.etMaxAge);
+        etparticcount=findViewById(R.id.etParticCount);
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -53,13 +69,7 @@ public class ViewSingleEventActivity extends AppCompatActivity {
 
         jevent=helper.getSingleEvent(eventid);
 
-        TextView tveventplace= findViewById(R.id.tvPlace);
-        EditText eteventname= findViewById(R.id.etEventName);
-        EditText etplannedstart= findViewById(R.id.etStart);
-        EditText etplannedend= findViewById(R.id.etEnd);
-        EditText etminage= findViewById(R.id.etMinAge);
-        EditText etmaxage= findViewById(R.id.etMaxAge);
-        EditText etparticcount=findViewById(R.id.etParticCount);
+
 
 
         String eventplace=jevent.getJuvinilename(); //this goes to uneditable textview
@@ -71,8 +81,7 @@ public class ViewSingleEventActivity extends AppCompatActivity {
         Integer maxage=jevent.getMaxage();
         Integer participants=jevent.getParticipants();
 
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX " + eventname );
-
+        //display the fetched data
         tveventplace.setText(eventplace);
         eteventname.setText(eventname);
         etplannedstart.setText(plannedstart);
@@ -83,5 +92,42 @@ public class ViewSingleEventActivity extends AppCompatActivity {
 
 
     }
+
+    public void updateEventDetails(View w) {
+
+        Integer ueventid= eventid;
+        String eventname=eteventname.getText().toString();
+        String plannedstart=etplannedstart.getText().toString();
+        String plannedend=etplannedend.getText().toString();
+        Integer minage= Integer.valueOf(etminage.getText().toString());
+        Integer maxage= Integer.valueOf(etmaxage.getText().toString());
+        Integer participants= Integer.valueOf(etparticcount.getText().toString());
+
+        jevent.setEventname(eventname);
+        jevent.setPlanned_startUI(plannedstart);
+        jevent.setPlanned_endUI(plannedend);
+        jevent.setMinage(minage);
+        jevent.setMaxage(maxage);
+        jevent.setParticipants(participants);
+
+        long id;
+        //TODO should we make the DB updates from here or from the object itself..
+        id=helper.updateJuvinileEventDetails(eventid,"eventname",jevent.getEventname());
+        id=helper.updateJuvinileEventDetails(eventid,"plannedstart",jevent.getEventname());
+        id=helper.updateJuvinileEventDetails(eventid,"plannedend",jevent.getEventname());
+        id=helper.updateJuvinileEventDetails(eventid,"minage",jevent.getEventname());
+        id=helper.updateJuvinileEventDetails(eventid,"maxage",jevent.getEventname());
+        id=helper.updateJuvinileEventDetails(eventid,"participants",jevent.getEventname());
+
+
+
+    }
+
+    public void goLive(View v) {
+
+
+    }
+
+
 
 }
