@@ -200,7 +200,8 @@ public class MyDbAdapter {
         myDbHelper.EVENTSTART + ", " +
         myDbHelper.EVENTEND +
         " FROM " + myDbHelper.TABLE_JUVINILE + ", " + myDbHelper.TABLE_EVENT +
-        " WHERE " + myDbHelper.TABLE_JUVINILE +"." + myDbHelper.JUVINILEID + " = " + myDbHelper.TABLE_EVENT +"." + myDbHelper.EJUVINILEID;
+        " WHERE " + myDbHelper.TABLE_JUVINILE +"." + myDbHelper.JUVINILEID + " = " + myDbHelper.TABLE_EVENT +"." + myDbHelper.EJUVINILEID +
+        " ORDER BY " + myDbHelper.JUVINILENAME + ", " + myDbHelper.EVENTPLANNEDSTART + " ASC";;
 
         SQLiteDatabase db = myhelper.getWritableDatabase();
         Cursor c = db.rawQuery(selectQuery,null);
@@ -281,7 +282,8 @@ public class MyDbAdapter {
                 myDbHelper.EVENTEND +
                 " FROM " + myDbHelper.TABLE_JUVINILE + ", " + myDbHelper.TABLE_EVENT +
                 " WHERE " + myDbHelper.TABLE_JUVINILE +"." + myDbHelper.JUVINILEID + " = " + myDbHelper.TABLE_EVENT +"." + myDbHelper.EJUVINILEID +
-                " AND date(" + myDbHelper.EVENTPLANNEDSTART + ") >= date('now') AND " +myDbHelper.EVENTEND + " is null";
+                " AND date(" + myDbHelper.EVENTPLANNEDSTART + ") >= date('now') AND " +myDbHelper.EVENTEND + " is null" +
+                " ORDER BY " + myDbHelper.JUVINILENAME + ", " + myDbHelper.EVENTPLANNEDSTART + " ASC";
 
         SQLiteDatabase db = myhelper.getWritableDatabase();
         Cursor c = db.rawQuery(selectQuery,null);

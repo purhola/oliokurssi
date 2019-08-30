@@ -1,9 +1,8 @@
 package com.purho.java.android.ct60a2411.juvinile;
 
-import java.sql.Timestamp;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -40,10 +39,6 @@ public class JuvinileEvent {
         this.participants=0;
         this.start_time= "2010-01-01 00:00:00"; //should be null or not taken to db at insert.
         this.end_time="2010-01-01 00:00:00"; //should be null or not taken to db at insert.
-
-
-        //TODO got to change timestamps to human readable format here or at least before displaying.
-
 
 
     }
@@ -94,14 +89,19 @@ public class JuvinileEvent {
         try {
             Date tempStart  = dforig.parse(planned_start);
             readable=dftarg.format(tempStart);
-        //    finally return readable;
-        } catch (ParseException ex) {System.out.println("DateConversionFailed");}
+        } catch (ParseException ex) {System.out.println("DateConversionFailed" + ex);}
         finally {}
         return readable;
     }
 
+
     public void setPlanned_start(String planned_start) {
 
+        //this is done from the DB and we want it unchanged
+        this.planned_start = planned_start;
+    }
+
+    public void setPlanned_startUI(String planned_start) {
         //here we want to change from dd.mm.yy hh:mm to yyyy-mm-dd hh:mm:ss
         SimpleDateFormat dforig = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat dftarg = new SimpleDateFormat("dd.MM.yy HH:mm");
@@ -109,17 +109,17 @@ public class JuvinileEvent {
         String planned_to_object="";
 
         try {
-            Date tempStart  = dforig.parse(planned_start);
-            planned_to_object=dftarg.format(tempStart);
+            Date tempStart  = dftarg.parse(planned_start);
+            planned_to_object=dforig.format(tempStart);
 
         } catch (ParseException ex) {System.out.println("DateConversionFailed");}
         finally {}
 
         this.planned_start = planned_to_object;
+
     }
 
     public String getPlanned_end() {
-
 
         //here we want to change from yyyy-mm-dd hh:mm:ss to dd.mm.yy hh:mm
         //just to be able to show a readable datetime
@@ -132,13 +132,20 @@ public class JuvinileEvent {
         try {
             Date tempStart  = dforig.parse(planned_end);
             readable=dftarg.format(tempStart);
-            //    finally return readable;
+
         } catch (ParseException ex) {System.out.println("DateConversionFailed");}
         finally {}
         return readable;
     }
 
     public void setPlanned_end(String planned_end) {
+
+        //this is done from the DB and we want it unchanged
+        this.planned_end=planned_end;
+
+    }
+
+    public void setPlanned_endUI(String planned_end){
 
         //here we want to change from dd.mm.yy hh:mm to yyyy-mm-dd hh:mm:ss
 
@@ -148,13 +155,14 @@ public class JuvinileEvent {
         String planned_to_object="";
 
         try {
-            Date tempEnd  = dforig.parse(planned_end);
-            planned_to_object=dftarg.format(tempEnd);
+            Date tempEnd  = dftarg.parse(planned_end);
+            planned_to_object=dforig.format(tempEnd);
 
         } catch (ParseException ex) {System.out.println("DateConversionFailed");}
         finally {}
 
         this.planned_end = planned_to_object;
+
     }
 
     public Integer getMinage() {
