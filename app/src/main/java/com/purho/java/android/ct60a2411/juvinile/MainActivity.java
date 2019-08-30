@@ -21,8 +21,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //does this start it over and over again each time you return back and forth or not?
     public void activity_event_data(View v){
-        Intent intent = new Intent(this,JuvinileEvent.class);
+        Intent intent = new Intent(this,EventData.class);
         startActivity(intent);
     }
 

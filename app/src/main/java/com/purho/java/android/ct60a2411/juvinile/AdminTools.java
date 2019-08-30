@@ -86,11 +86,19 @@ public class AdminTools extends AppCompatActivity implements MyRecyclerViewAdapt
         //String active=data[6];
 
         //First Event
-        eventdata[0]="1";eventdata[1]="Ykskemut";eventdata[2]="2109-08-29 14:30:00";eventdata[3]="2109-08-29 16:30:00";eventdata[4]="10";eventdata[5]="12";eventdata[6]="NO";
+        eventdata[0]="1";eventdata[1]="Ykskemut";eventdata[2]="2019-08-29 14:30:00";eventdata[3]="2109-08-29 16:30:00";eventdata[4]="10";eventdata[5]="12";eventdata[6]="NO";
         insertInitEvent(eventdata);
         //Second event
-        eventdata[0]="1";eventdata[1]="Kakskemut";eventdata[2]="2109-08-30 16:30:00";eventdata[3]="2109-08-29 22:30:00";eventdata[4]="15";eventdata[5]="18";eventdata[6]="NO";
+        eventdata[0]="1";eventdata[1]="Kakskemut";eventdata[2]="2019-08-30 16:30:00";eventdata[3]="2109-08-29 22:30:00";eventdata[4]="15";eventdata[5]="18";eventdata[6]="NO";
         insertInitEvent(eventdata);
+
+        eventdata[0]="1";eventdata[1]="Kolmekemut";eventdata[2]="2019-08-31 16:30:00";eventdata[3]="2109-08-29 22:30:00";eventdata[4]="15";eventdata[5]="18";eventdata[6]="NO";
+        insertInitEvent(eventdata);
+
+        eventdata[0]="1";eventdata[1]="Nelkemut";eventdata[2]="2019-09-01 16:30:00";eventdata[3]="2109-08-29 22:30:00";eventdata[4]="15";eventdata[5]="18";eventdata[6]="NO";
+        insertInitEvent(eventdata);
+
+
 
 
         //String jeventid=data[0];
