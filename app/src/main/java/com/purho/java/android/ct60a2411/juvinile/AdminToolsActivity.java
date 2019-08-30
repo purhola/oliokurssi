@@ -75,7 +75,7 @@ public class AdminToolsActivity extends AppCompatActivity implements MyRecyclerV
         String[] juviniledata = new String[3];
         String[] eventdata = new String[7];
         String[] feedbackdata = new String[4];
-        System.out.println("populateInit1");
+        System.out.println("populateInit1 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" );
 
         //String name=juviniledata[0];
         //String address=juviniledata[1];
@@ -129,12 +129,13 @@ public class AdminToolsActivity extends AppCompatActivity implements MyRecyclerV
     }
 
     public void insertInitJuv(String[] data){
-        //System.out.println("insert1");
+        System.out.println("insert1   juvi YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
         long id = helper.insertDataJuvinile(data);
         if(id<=0)
         {
             Message.message(getApplicationContext(),"Juvinile Insertion Unsuccessful");
             //Name.setText("");
+            System.out.println("JUVI INSERTION UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
             //Pass.setText("");
         } else
         {
@@ -152,11 +153,13 @@ public class AdminToolsActivity extends AppCompatActivity implements MyRecyclerV
         if(id<=0)
         {
             Message.message(getApplicationContext(),"Event Insertion Unsuccessful");
+            System.out.println("EVENT INSERTION UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
             //Name.setText("");
             //Pass.setText("");
         } else
         {
             Message.message(getApplicationContext(),"Event Insertion Successful");
+            System.out.println("EVENT INSERTION SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
             //Name.setText("");
             //Pass.setText("");
         }

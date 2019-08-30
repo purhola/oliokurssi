@@ -113,11 +113,11 @@ public class ViewSingleEventActivity extends AppCompatActivity {
 
         long id;
         //TODO should we make the DB updates from here or from the object itself..
-        //TODO!! loses times, must check
-        id=helper.updateJuvinileEventDetails(eventid,"eventname",jevent.getEventname());
+        //create a message if any fail, also msg if all are saved ok
 
-        id=helper.updateJuvinileEventDetails(eventid,"plannedstart",jevent.getPlanned_start());
-        id=helper.updateJuvinileEventDetails(eventid,"plannedend",jevent.getPlanned_end());
+        id=helper.updateJuvinileEventDetails(eventid,"eventname",jevent.getEventname());
+        id=helper.updateJuvinileEventDetails(eventid,"plannedstart",jevent.getPlanned_startDB());
+        id=helper.updateJuvinileEventDetails(eventid,"plannedend",jevent.getPlanned_endDB());
         id=helper.updateJuvinileEventDetails(eventid,"minage", String.valueOf(jevent.getMinage()));
         id=helper.updateJuvinileEventDetails(eventid,"maxage", String.valueOf(jevent.getMaxage()));
         id=helper.updateJuvinileEventDetails(eventid,"participants", String.valueOf(jevent.getParticipants()));
@@ -128,8 +128,8 @@ public class ViewSingleEventActivity extends AppCompatActivity {
 
     public void goLive(View v) {
 
-        Intent intent = new Intent(this,EventActiveAcitivity.class);
-        intent.putExtra("event_id", eventid);
+        Intent intent = new Intent(this,EventActiveActivity.class);
+        intent.putExtra("event_id", Integer.toString(eventid));
         startActivity(intent);
 
     }

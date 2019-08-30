@@ -4,37 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EventActive">
+    tools:context=".EventActiveActivity">
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/btnStartEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start"
-        tools:layout_editor_absoluteX="38dp"
-        tools:layout_editor_absoluteY="93dp" />
+        android:onClick="startEvent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.117"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.115" />
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/btnEnEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stop"
-        tools:layout_editor_absoluteX="231dp"
-        tools:layout_editor_absoluteY="93dp" />
+        android:text="End"
+        android:onClick="endEvent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.746"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.114" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/btnAddPartic"
         android:layout_width="179dp"
         android:layout_height="157dp"
         android:text="Participant +"
-        tools:layout_editor_absoluteX="97dp"
-        tools:layout_editor_absoluteY="225dp" />
+        android:onClick="addParticipant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/btnFeedBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Feedback"
-        tools:layout_editor_absoluteX="62dp"
-        tools:layout_editor_absoluteY="490dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.103"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.795" />
 </androidx.constraintlayout.widget.ConstraintLayout>

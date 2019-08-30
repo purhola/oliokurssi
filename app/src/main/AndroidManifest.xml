@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EventActiveAcitivity" />
+        <activity android:name=".EventActiveActivity" />
         <activity android:name=".EventDataActivity" />
         <activity android:name=".MasterDataActivity" />
         <activity android:name=".AdminToolsActivity" />

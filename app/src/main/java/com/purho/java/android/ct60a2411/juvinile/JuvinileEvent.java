@@ -94,6 +94,10 @@ public class JuvinileEvent {
         return readable;
     }
 
+    public String getPlanned_startDB() {
+
+        return planned_start;
+    }
 
     public void setPlanned_start(String planned_start) {
 
@@ -136,6 +140,11 @@ public class JuvinileEvent {
         } catch (ParseException ex) {System.out.println("DateConversionFailed");}
         finally {}
         return readable;
+    }
+
+    public String getPlanned_endDB() {
+
+        return planned_end;
     }
 
     public void setPlanned_end(String planned_end) {

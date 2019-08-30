@@ -450,8 +450,8 @@ public class MyDbAdapter {
 
 
     static class myDbHelper extends SQLiteOpenHelper {
-        private static final String DATABASE_NAME = "playtodella3";    // Database Name
-        private static final int DATABASE_Version = 2;    // Database Version
+        private static final String DATABASE_NAME = "playtodella4";    // Database Name
+        private static final int DATABASE_Version = 4;    // Database Version
 
         //table juvinile
         private static final String TABLE_JUVINILE = "juvinile";   // table juvinile as in nuorisotila
@@ -493,11 +493,11 @@ public class MyDbAdapter {
         private static final String CREATE_TABLE_JUVINILE =
                 "CREATE TABLE " + TABLE_JUVINILE + " ("
                         + JUVINILEID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                        + JUVINILENAME + " TEXT,"
-                        + ADDRESS + " TEXT, "
-                        + CITY + " TEXT,"
-                        + JDBTIME + " DATETIME DEFAULT DATETIME(TIMESTAMP, 'localtime'),"
-                        + JDBCHANGE + " DATETIME DEFAULT DATETIME(TIMESTAMP, 'localtime')"
+                        + JUVINILENAME + " VARCHAR(20),"
+                        + ADDRESS + " VARCHAR(100), "
+                        + CITY + " VARCHAR(20),"
+                        + JDBTIME + " DATETIME DEFAULT CURRENT_TIMESTAMP, "
+                        + JDBCHANGE + " DATETIME DEFAULT CURRENT_TIMESTAMP"
                         + ");";
         private static final String DROP_TABLE_JUVINILE = "DROP TABLE IF EXISTS " + TABLE_JUVINILE;
 
@@ -515,8 +515,8 @@ public class MyDbAdapter {
                         + MAXAGE + " INTEGER, "
                         + PARTICIPANTS_COUNT + " INTEGER DEFAULT 0, "
                         + ACTIVE + " TEXT, "
-                        + EDBTIME + " DATETIME DEFAULT DATETIME(TIMESTAMP, 'localtime'),"
-                        + EDBCHANGE + " DATETIME DEFAULT DATETIME(TIMESTAMP, 'localtime')"
+                        + EDBTIME + " DATETIME DEFAULT CURRENT_TIMESTAMP, "
+                        + EDBCHANGE + " DATETIME DEFAULT CURRENT_TIMESTAMP "
                         + ");";
         private static final String DROP_TABLE_EVENT = "DROP TABLE IF EXISTS " + TABLE_EVENT;
 
@@ -528,8 +528,8 @@ public class MyDbAdapter {
                         + GRADE + " INTEGER,"
                         + FEEDBACK + " TEXT, "
                         + PARTICIPANT + " TEXT DEFAULT 'Anonymous', "
-                        + FDBTIME + " DATETIME DEFAULT DATETIME(TIMESTAMP, 'localtime')"
-                        + FDBCHANGE + " DATETIME DEFAULT DATETIME(TIMESTAMP, 'localtime') "
+                        + FDBTIME + " DATETIME DEFAULT CURRENT_TIMESTAMP, "
+                        + FDBCHANGE + " DATETIME DEFAULT CURRENT_TIMESTAMP "
                         + ");";
         private static final String DROP_TABLE_FEEDBACK = "DROP TABLE IF EXISTS " + TABLE_FEEDBACK;
 
@@ -543,13 +543,16 @@ public class MyDbAdapter {
 
         public void onCreate(SQLiteDatabase db) {
 
+            System.out.println("PITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISI");
+
             try {
                 db.execSQL(CREATE_TABLE_JUVINILE);
                 db.execSQL(CREATE_TABLE_EVENT);
                 db.execSQL(CREATE_TABLE_FEEDBACK);
-                //System.out.println("tehtiinkohan jotain");
+                System.out.println("tehtiinkohan jotain");
             } catch (Exception e) {
                 Message.message(context, "" + e);
+                System.out.println("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE" + e);
             }
         }
 
