@@ -13,13 +13,6 @@ public class ViewSingleEventActivity extends AppCompatActivity {
     MyDbAdapter helper;
     JuvinileEvent jevent= new JuvinileEvent();
 
-    TextView tveventplace= findViewById(R.id.tvPlace);
-    EditText eteventname= findViewById(R.id.etEventName);
-    EditText etplannedstart= findViewById(R.id.etStart);
-    EditText etplannedend= findViewById(R.id.etEnd);
-   // EditText etminage= findViewById(R.id.etMinAge);
-   // EditText etmaxage= findViewById(R.id.etMaxAge);
-    //EditText etparticcount=findViewById(R.id.etParticCount);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,25 +53,33 @@ public class ViewSingleEventActivity extends AppCompatActivity {
 
         jevent=helper.getSingleEvent(eventid);
 
+        TextView tveventplace= findViewById(R.id.tvPlace);
+        EditText eteventname= findViewById(R.id.etEventName);
+        EditText etplannedstart= findViewById(R.id.etStart);
+        EditText etplannedend= findViewById(R.id.etEnd);
+        EditText etminage= findViewById(R.id.etMinAge);
+        EditText etmaxage= findViewById(R.id.etMaxAge);
+        EditText etparticcount=findViewById(R.id.etParticCount);
+
 
         String eventplace=jevent.getJuvinilename(); //this goes to uneditable textview
         //Integer eventid=jevent.getEventid();
         String eventname=jevent.getEventname();
         String plannedstart=jevent.getPlanned_start();
         String plannedend=jevent.getPlanned_end();
-       // Integer minage=jevent.getMinage();
-        //Integer maxage=jevent.getMaxage();
-        //Integer participants=jevent.getParticipants();
+        Integer minage=jevent.getMinage();
+        Integer maxage=jevent.getMaxage();
+        Integer participants=jevent.getParticipants();
 
         System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX " + eventname );
 
-        //tveventplace.setText(eventplace);
+        tveventplace.setText(eventplace);
         eteventname.setText(eventname);
         etplannedstart.setText(plannedstart);
         etplannedend.setText(plannedend);
-       // etminage.setText(Integer.toString(minage));
-       // etmaxage.setText(Integer.toString(maxage));
-       // etparticcount.setText(Integer.toString(participants));
+        etminage.setText(Integer.toString(minage));
+        etmaxage.setText(Integer.toString(maxage));
+        etparticcount.setText(Integer.toString(participants));
 
 
     }
