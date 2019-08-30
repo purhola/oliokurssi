@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FeedBackActivity"></activity>
+        <activity android:name=".ViewSingleEventActivity"></activity>
+        <activity android:name=".FeedBackActivity" />
         <activity android:name=".EventActive" />
         <activity android:name=".AdminTools" />
         <activity android:name=".EventData" />
@@ -21,6 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".EventActiveAcitivity" />
+        <activity android:name=".EventDataActivity" />
+        <activity android:name=".MasterDataActivity" />
+        <activity android:name=".AdminToolsActivity" />
     </application>
 
 </manifest>

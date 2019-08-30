@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -11,7 +12,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class EventData extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
+public class EventDataActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
 
     MyDbAdapter helper;
     MyRecyclerViewAdapter adapter;
@@ -67,6 +68,16 @@ public class EventData extends AppCompatActivity implements MyRecyclerViewAdapte
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
         System.out.println("ja positiohan on" + position);
         //TODO how can we get to the line clicked!!! need the id from there at least.. best would be if we could just move to a new place (ylläpito) directly
+
+
+
+        Intent intent = new Intent(this, ViewSingleEventActivity.class);
+        intent.putExtra("eventidrow", adapter.getItem(position));
+        startActivity(intent);
+
+
+
+
 
     }
 

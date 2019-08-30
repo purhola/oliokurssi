@@ -329,7 +329,85 @@ public class MyDbAdapter {
         return eventDataList;
     }
 
+    //SELECT ONE SINGLE EVENT
+    public JuvinileEvent getSingleEvent(Integer e_eventid) {
 
+        //Variables for storing the results
+
+        Integer eventid;
+        Integer juvilineid;
+        String juvilinename = "";
+        String eventname = "";
+        String plannedstarttime = "2010-01-01 00:00:00";
+        String plannedendtime = "2010-01-01 00:00:00";
+        Integer minage = 0;
+        Integer maxage = 0;
+        Integer participants = 0;
+        String active = "";
+        String starttime = "2010-01-01 00:00:00";
+        String endtime = "2010-01-01 00:00:00";
+
+        //create the query
+        String selectQuery = "SELECT " +
+                myDbHelper.EVENTID + ", " +
+                myDbHelper.TABLE_JUVINILE + "." + myDbHelper.JUVINILEID + ", " +
+                myDbHelper.JUVINILENAME + ", " +
+                myDbHelper.EVENTNAME + ", " +
+                myDbHelper.EVENTPLANNEDSTART + ", " +
+                myDbHelper.EVENTPLANNEDEND + ", " +
+                myDbHelper.MINAGE + ", " +
+                myDbHelper.MAXAGE + ", " +
+                myDbHelper.PARTICIPANTS_COUNT + ", " +
+                myDbHelper.ACTIVE + ", " +
+                myDbHelper.EVENTSTART + ", " +
+                myDbHelper.EVENTEND +
+                " FROM " + myDbHelper.TABLE_JUVINILE + ", " + myDbHelper.TABLE_EVENT +
+                " WHERE " + myDbHelper.TABLE_JUVINILE + "." + myDbHelper.JUVINILEID + " = " + myDbHelper.TABLE_EVENT + "." + myDbHelper.EJUVINILEID +
+                " AND " + myDbHelper.EVENTID + " = " + e_eventid;
+
+        SQLiteDatabase db = myhelper.getWritableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        //go through the whole table
+        JuvinileEvent tempevent = null;
+        if (c.moveToFirst()) {
+            do {
+                tempevent = new JuvinileEvent();
+
+                //read the db
+                eventid = c.getInt(c.getColumnIndex(myDbHelper.EVENTID));
+                juvilineid = c.getInt(c.getColumnIndex(myDbHelper.JUVINILEID));
+                juvilinename = c.getString(c.getColumnIndex(myDbHelper.JUVINILENAME));
+                eventname = c.getString(c.getColumnIndex(myDbHelper.EVENTNAME));
+                plannedstarttime = c.getString(c.getColumnIndex(myDbHelper.EVENTPLANNEDSTART));
+                plannedendtime = c.getString(c.getColumnIndex(myDbHelper.EVENTPLANNEDEND));
+                minage = c.getInt(c.getColumnIndex(myDbHelper.MINAGE));
+                maxage = c.getInt(c.getColumnIndex(myDbHelper.MAXAGE));
+                participants = c.getInt(c.getColumnIndex(myDbHelper.PARTICIPANTS_COUNT));
+                active = c.getString(c.getColumnIndex(myDbHelper.ACTIVE));
+                starttime = c.getString(c.getColumnIndex(myDbHelper.EVENTSTART));
+                endtime = c.getString(c.getColumnIndex(myDbHelper.EVENTEND));
+
+                //Assign the values to eventdata object
+                tempevent.setEventid(eventid);
+                tempevent.setJuvinileid(juvilineid);
+                tempevent.setJuvinilename(juvilinename);
+                tempevent.setEventname(eventname);
+                tempevent.setPlanned_start(plannedstarttime);
+                tempevent.setPlanned_end(plannedendtime);
+                tempevent.setMinage(minage);
+                tempevent.setMaxage(maxage);
+                tempevent.setParticipants(participants);
+                tempevent.setActive(active);
+                tempevent.setStart_time(starttime);
+                tempevent.setEnd_time(endtime);
+
+
+            } while (c.moveToNext());
+            Log.d("object", "single event");
+        }
+        return tempevent;
+    }
 
     //DELETE
 

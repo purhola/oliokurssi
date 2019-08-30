@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MasterData extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
+public class MasterDataActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
 
     MyRecyclerViewAdapter adapter;
 

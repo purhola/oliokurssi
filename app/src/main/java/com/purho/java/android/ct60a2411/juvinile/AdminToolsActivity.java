@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class AdminTools extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
+public class AdminToolsActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
 
     MyDbAdapter helper;
     MyRecyclerViewAdapter adapter;
@@ -46,8 +46,20 @@ public class AdminTools extends AppCompatActivity implements MyRecyclerViewAdapt
         //fill the array
         for (Juvinile tempjuvi:juvinileArray){
             tesArrayFill=tempjuvi.getName() +" " + tempjuvi.getCity() +" "+ tempjuvi.getAddress();
-            tesArray.add(tesArrayFill);
+        //    tesArray.add(tesArrayFill);
         }
+
+
+
+        JuvinileEvent jevent= new JuvinileEvent();
+
+        jevent=helper.getSingleEvent(5);
+
+        tesArrayFill=jevent.getEventname() +" " + jevent.getEventid() +" "+ jevent.getPlanned_start() +" " + jevent.getPlanned_end();
+
+        tesArray.add(tesArrayFill);
+
+
 
         // set up the RecyclerView and display the results
         RecyclerView recyclerView = findViewById(R.id.rvMaster);
@@ -168,6 +180,12 @@ public class AdminTools extends AppCompatActivity implements MyRecyclerViewAdapt
 
     }
 
+    public void testEventRead(View v) {
+
+        JuvinileEvent jevent= new JuvinileEvent();
+
+        jevent=helper.getSingleEvent(5);
+    }
 
 
 }
