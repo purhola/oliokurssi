@@ -23,21 +23,6 @@ public class AdminTools extends AppCompatActivity implements MyRecyclerViewAdapt
 
         helper = new MyDbAdapter(this);
 
-        ArrayList<String> animalNames = new ArrayList<>();
-        animalNames.add("Horse");
-        animalNames.add("Cow");
-        animalNames.add("Camel");
-        animalNames.add("Sheep");
-        animalNames.add("Goat");
-/*
-        // set up the RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.rvMaster);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MyRecyclerViewAdapter(this, animalNames);
-        adapter.setClickListener(this);
-        recyclerView.setAdapter(adapter);
-*/
-
     }
 
     @Override

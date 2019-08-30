@@ -9,14 +9,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Events today"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.176"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.351" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnLocations"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Show locations"
@@ -28,7 +30,7 @@
         app:layout_constraintVertical_bias="0.052" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnEvents"
         android:layout_width="137dp"
         android:layout_height="46dp"
         android:text="Show events"
@@ -40,7 +42,7 @@
         app:layout_constraintVertical_bias="0.147" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnNewEvent"
         android:layout_width="143dp"
         android:layout_height="48dp"
         android:text="New event"
@@ -60,5 +62,15 @@
         android:text="Admin/populate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="222dp"
+        android:layout_height="213dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.306"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.565" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,6 +21,20 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void activity_event_data(View v){
+        Intent intent = new Intent(this,JuvinileEvent.class);
+        startActivity(intent);
+    }
+
+    public void activity_master_data(View v){
+        Intent intent = new Intent(this,MasterData.class);
+        startActivity(intent);
+    }
+
+    //public void activity_new_event(View v){
+    //    Intent intent = new Intent(this,NewJuvinileEvent.class);
+    //    startActivity(intent);
+    //}
 
 
 }

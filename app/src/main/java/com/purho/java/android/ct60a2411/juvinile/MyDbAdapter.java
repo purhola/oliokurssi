@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 //note to self: THE DB GOES TO
@@ -15,8 +16,8 @@ import java.util.ArrayList;
 //TODO stringsql
 //compileStatement()
 //Compiles an SQL statement into a reusable pre-compiled statement object.
-//Use this method as below
-//compileStatement(String sql)
+////Use this method as below
+////compileStatement(String sql)
 //Pass sql statement as a parameter in string the format.
 
 public class MyDbAdapter {
@@ -113,9 +114,10 @@ public class MyDbAdapter {
 
     //SELECT
 
-    //lets fetch the list of places - need to make one for events, which would be combining
+    //lets fetch the list of JUVINILES
+    // - need to make one for events, which would be combining
     //also need one for feedbacks concerning one event at  time
-    // TODO find a way to store results of multiple columns
+
     public ArrayList<Juvinile> getJuvinileList() //the select query here as string parameter?
     {
 
@@ -125,7 +127,7 @@ public class MyDbAdapter {
         String name="";
         String location=""; //could be also city
         String address="";
-        String selectQuery = "SELECT * FROM " + myDbHelper.TABLE_JUVINILE; //suppose this coulb be generic and provided via string?
+        String selectQuery = "SELECT * FROM " + myDbHelper.TABLE_JUVINILE; //suppose this could be generic and provided via string?
 
         SQLiteDatabase db = myhelper.getWritableDatabase();
         Cursor c = db.rawQuery(selectQuery,null);
@@ -152,6 +154,77 @@ public class MyDbAdapter {
             Log.d("array",juvinilesList.toString());
         }
         return juvinilesList;
+    }
+
+    //SELECT EVENTDATA -ALL
+    // NOTE that when fetching the upcoming ones we don't need all the data like starttime and endtime, they don't exist..
+    public ArrayList<JuvinileEvent> getEventData() //the select query here as string parameter?
+    {
+
+        //list for storing the results
+        ArrayList<JuvinileEvent> eventDataList = new ArrayList<JuvinileEvent>();
+        Integer eventid;
+        Integer juvilineid;
+        String juvilinename="";
+        String eventname="";
+        String plannedstarttime= "2010-01-01 00:00:00";
+        String plannedendtime= "2010-01-01 00:00:00";
+        Integer minage=0;
+        Integer maxage=0;
+        Integer participants=0;
+        String active="";
+        String starttime= "2010-01-01 00:00:00";
+        String endtime= "2010-01-01 00:00:00";
+
+        //suppose this could be generic and provided via string?
+        //on the other hand does it matter where it's generated..
+        String selectQuery = "SELECT * " +
+                "event.eventid, juvinile.juvinileid, juvinile.juvinilename, " +
+                "event.eventname, event.plannedstart, event.plannedend, event.minage, event.maxage, event.participants " +
+                "event.active, event.start, event.end " +
+                "FROM juvinile INNNER JOIN event on juvinile.juvinileid=event.juvinileid";
+
+        SQLiteDatabase db = myhelper.getWritableDatabase();
+        Cursor c = db.rawQuery(selectQuery,null);
+        //go through the whole table
+        if(c.moveToFirst()) {
+            do {
+                JuvinileEvent tempevent = new JuvinileEvent();
+
+                //read the db
+                eventid = c.getInt(c.getColumnIndex(myDbHelper.EVENTID));
+                juvilineid =  c.getInt(c.getColumnIndex(myDbHelper.JUVINILEID));
+                juvilinename=  c.getString(c.getColumnIndex(myDbHelper.JUVINILENAME));
+                eventname= c.getString(c.getColumnIndex(myDbHelper.EVENTNAME));
+                plannedstarttime= c.getString(c.getColumnIndex(myDbHelper.EVENTPLANNEDSTART));
+                plannedendtime= c.getString(c.getColumnIndex(myDbHelper.EVENTPLANNEDEND));
+                minage= c.getInt(c.getColumnIndex(myDbHelper.MINAGE));
+                maxage= c.getInt(c.getColumnIndex(myDbHelper.MAXAGE));
+                participants= c.getInt(c.getColumnIndex(myDbHelper.PARTICIPANTS_COUNT));
+                active= c.getString(c.getColumnIndex(myDbHelper.ACTIVE));
+                starttime= c.getString(c.getColumnIndex(myDbHelper.EVENTSTART));
+                endtime= c.getString(c.getColumnIndex(myDbHelper.EVENTEND));
+
+                //Assign the values to eventdata object
+                tempevent.setEventid(eventid);
+                tempevent.setJuvinileid(juvilineid);
+                tempevent.setJuvinilename(juvilinename);
+                tempevent.setEventname(eventname);
+                tempevent.setPlanned_start(plannedstarttime);
+                tempevent.setPlanned_end(plannedendtime);
+                tempevent.setMinage(minage);
+                tempevent.setMaxage(maxage);
+                tempevent.setParticipants(participants);
+                tempevent.setActive(active);
+                tempevent.setStart_time(starttime);
+                tempevent.setEnd_time(endtime);
+
+                //add the object to the list
+                eventDataList.add(tempevent);
+            } while (c.moveToNext());
+            Log.d("array",eventDataList.toString());
+        }
+        return eventDataList;
     }
 
 
