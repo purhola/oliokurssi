@@ -1,6 +1,12 @@
 package com.purho.java.android.ct60a2411.juvinile;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class JuvinileEvent {
 
@@ -76,19 +82,79 @@ public class JuvinileEvent {
     }
 
     public String getPlanned_start() {
-        return planned_start;
+
+        //here we want to change from yyyy-mm-dd hh:mm:ss to dd.mm.yy hh:mm
+        //just to be able to show a readable datetime
+
+        SimpleDateFormat dforig = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dftarg = new SimpleDateFormat("dd.MM.yy HH:mm");
+
+        String readable="";
+
+        try {
+            Date tempStart  = dforig.parse(planned_start);
+            readable=dftarg.format(tempStart);
+        //    finally return readable;
+        } catch (ParseException ex) {System.out.println("DateConversionFailed");}
+        finally {}
+        return readable;
     }
 
     public void setPlanned_start(String planned_start) {
-        this.planned_start = planned_start;
+
+        //here we want to change from dd.mm.yy hh:mm to yyyy-mm-dd hh:mm:ss
+        SimpleDateFormat dforig = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dftarg = new SimpleDateFormat("dd.MM.yy HH:mm");
+
+        String planned_to_object="";
+
+        try {
+            Date tempStart  = dforig.parse(planned_start);
+            planned_to_object=dftarg.format(tempStart);
+
+        } catch (ParseException ex) {System.out.println("DateConversionFailed");}
+        finally {}
+
+        this.planned_start = planned_to_object;
     }
 
     public String getPlanned_end() {
-        return planned_end;
+
+
+        //here we want to change from yyyy-mm-dd hh:mm:ss to dd.mm.yy hh:mm
+        //just to be able to show a readable datetime
+
+        SimpleDateFormat dforig = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dftarg = new SimpleDateFormat("dd.MM.yy HH:mm");
+
+        String readable="";
+
+        try {
+            Date tempStart  = dforig.parse(planned_end);
+            readable=dftarg.format(tempStart);
+            //    finally return readable;
+        } catch (ParseException ex) {System.out.println("DateConversionFailed");}
+        finally {}
+        return readable;
     }
 
     public void setPlanned_end(String planned_end) {
-        this.planned_end = planned_end;
+
+        //here we want to change from dd.mm.yy hh:mm to yyyy-mm-dd hh:mm:ss
+
+        SimpleDateFormat dforig = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dftarg = new SimpleDateFormat("dd.MM.yy HH:mm");
+
+        String planned_to_object="";
+
+        try {
+            Date tempEnd  = dforig.parse(planned_end);
+            planned_to_object=dftarg.format(tempEnd);
+
+        } catch (ParseException ex) {System.out.println("DateConversionFailed");}
+        finally {}
+
+        this.planned_end = planned_to_object;
     }
 
     public Integer getMinage() {
@@ -124,19 +190,58 @@ public class JuvinileEvent {
     }
 
     public String getStart_time() {
-        return start_time;
+
+        //here we want to change from yyyy-mm-dd hh:mm:ss to dd.mm.yy hh:mm
+        //just to be able to show a readable datetime
+
+        SimpleDateFormat dforig = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dftarg = new SimpleDateFormat("dd.MM.yy HH:mm");
+
+        String readable="";
+
+        try {
+            Date tempStart  = dforig.parse(start_time);
+            readable=dftarg.format(tempStart);
+            //    finally return readable;
+        } catch (ParseException ex) {System.out.println("DateConversionFailed");}
+        finally {}
+        return readable;
     }
 
     public void setStart_time(String start_time) {
-        this.start_time = start_time;
+
+        //here we want to take the current timestamp so we don't actually need the input parameter
+
+        LocalDateTime start = LocalDateTime.now();
+
+        this.start_time = start.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
     }
 
     public String getEnd_time() {
-        return end_time;
+
+        //here we want to change from yyyy-mm-dd hh:mm:ss to dd.mm.yy hh:mm
+        //just to be able to show a readable datetime
+
+        SimpleDateFormat dforig = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dftarg = new SimpleDateFormat("dd.MM.yy HH:mm");
+
+        String readable="";
+
+        try {
+            Date tempEnd  = dforig.parse(end_time);
+            readable=dftarg.format(tempEnd);
+            //    finally return readable;
+        } catch (ParseException ex) {System.out.println("DateConversionFailed");}
+        finally {}
+        return readable;
     }
 
     public void setEnd_time(String end_time) {
-        this.end_time = end_time;
+
+        LocalDateTime stop = LocalDateTime.now();
+
+        this.end_time = stop.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
     public Integer getEventid() {
