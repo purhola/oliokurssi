@@ -34,52 +34,39 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
 
         helper = new MyDbAdapter(this);
 
+
+        tveventplace = (TextView) findViewById(R.id.tvPlace);
+        eteventname = (EditText) findViewById(R.id.etEventName);
+        etplannedstart = (EditText) findViewById(R.id.etStart);
+        etplannedend = (EditText) findViewById(R.id.etEnd);
+        etminage = (EditText) findViewById(R.id.etMinAge);
+        etmaxage = (EditText) findViewById(R.id.etMaxAge);
+        etparticcount = (EditText) findViewById(R.id.etParticCount);
+
+
+
+
         Intent i = getIntent();
-            i.getSerializableExtra("eventObject");
-            if(i.getSerializableExtra("eventObject") == null) {
-                jevent= new JuvinileEvent();
-            } else {
-                jevent = (JuvinileEvent)i.getSerializableExtra("eventObject");
-            }
-
-        System.out.println("JEVENTNAME JEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAME:" + jevent.getEventname() );
-
-       /* //This is all about retracting the juvinile-eventid in order to fetch correct data.
-        String toparse;
-        tveventplace= findViewById(R.id.tvPlace);
-        eteventname= findViewById(R.id.etEventName);
-        etplannedstart= findViewById(R.id.etStart);
-        etplannedend= findViewById(R.id.etEnd);
-        etminage= findViewById(R.id.etMinAge);
-        etmaxage= findViewById(R.id.etMaxAge);
-        etparticcount=findViewById(R.id.etParticCount);
-
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                toparse= "";
-            } else {
-                toparse= extras.getString("eventidrow");
-            }
+        i.getSerializableExtra("eventObject");
+        if (i.getSerializableExtra("eventObject") == null) {
+            //jevent = new JuvinileEvent();
+            System.out.println("***************Can't find the event****************");
         } else {
-            toparse= (String) savedInstanceState.getSerializable("eventidrow");
+            jevent = (JuvinileEvent) i.getSerializableExtra("eventObject");
         }
 
-        Scanner sc = new Scanner(toparse);
-        //and here it is
-        eventid=sc.nextInt();
-        getSingleEventData(eventid);
-        */
+        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" + jevent.getEventname());
+
+        setUpDisplay();
+
     }
 
 
     public void getSingleEventData(Integer eventid){
 
-        //System.out.println("eventid on " + eventid + " RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-
         //create an object for the event data and get it from the DB
 
-        jevent=helper.getSingleEvent(eventid);
+        // jevent=helper.getSingleEvent(eventid); //we don't want to do this as the object should be already passed here
 
 
 
@@ -104,6 +91,29 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
 
 
     }
+
+    public void setUpDisplay(){
+
+
+        String eventplace=jevent.getJuvinilename(); //this goes to uneditable textview
+        String eventname=jevent.getEventname();
+        String plannedstart=jevent.getPlanned_start();
+        String plannedend=jevent.getPlanned_end();
+        Integer minage=jevent.getMinage();
+        Integer maxage=jevent.getMaxage();
+        Integer participants=jevent.getParticipants();
+
+        //display the fetched data
+        tveventplace.setText(eventplace);
+        eteventname.setText(eventname);
+        etplannedstart.setText(plannedstart);
+        etplannedend.setText(plannedend);
+        etminage.setText(Integer.toString(minage));
+        etmaxage.setText(Integer.toString(maxage));
+        etparticcount.setText(Integer.toString(participants));
+    }
+
+
 
     public void updateEventDetails(View w) {
 

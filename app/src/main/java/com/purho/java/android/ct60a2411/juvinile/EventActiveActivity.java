@@ -16,8 +16,8 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
     JuvinileEvent jevent;
     Integer eventid=0;
     Button particb;
-    Integer count;
-    Integer participants;
+    //Integer count=0;
+    //Integer participants;
 
 
     @Override
@@ -26,6 +26,7 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
         setContentView(R.layout.activity_event_active);
 
         String toparse;
+        particb = (Button) findViewById(R.id.btnAddPartic);
 
         Intent i = getIntent();
         i.getSerializableExtra("passEventObjectLive");
@@ -35,38 +36,19 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
             jevent = (JuvinileEvent)i.getSerializableExtra("passEventObjectLive");
         }
 
-        /*
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                toparse= "";
-            } else {
-                toparse= extras.getString("event_id");
-            }
-        } else {
-            toparse= (String) savedInstanceState.getSerializable("event_id");
-        }
-
-        Scanner sc = new Scanner(toparse);
-        //and here it is
-        eventid=sc.nextInt();
-        System.out.println("EVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTID " + eventid);
-  //      getSingleEventDatal(eventid); //TODO. ei tykkää hakea tässä tuota!!
-*/
-
     }
 
 
 
     public void addParticipant(View x){
 
-        particb = (Button) findViewById(R.id.btnAddPartic);
 
-        count+=1;
 
-                //jevent.getParticipants()+1;
 
-        particb.setText("eeeiiiikä");
+
+        Integer count=jevent.getParticipants()+1;
+
+        particb.setText(Integer.toString(count));
 
 
 
