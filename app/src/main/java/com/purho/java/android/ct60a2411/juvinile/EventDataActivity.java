@@ -43,7 +43,6 @@ public class EventDataActivity extends AppCompatActivity implements MyRecyclerVi
 
         juvinileEventArray = helper.getNewEventData(); // method in dbadapter to fetch upcoming events
 
-        System.out.println("ARRAY ARRAY size in oncreate: " + juvinileEventArray.size()); //TODO this has been filled below, but for some reason not usable here!!
 
         //fill the array
         for (JuvinileEvent tempevent:juvinileEventArray){

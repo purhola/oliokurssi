@@ -25,6 +25,25 @@ public class MyDbAdapter implements Serializable {
 
     myDbHelper myhelper;
 
+    private Integer eventid;
+    private Integer juvilineid;
+    private String juvilinename;
+    private String eventname;
+    private String plannedstarttime;
+    private String plannedendtime;
+    private Integer minage;
+    private Integer maxage;
+    private Integer participants;
+    private String active;
+    private String starttime;
+    private String endtime;
+    private String name;
+    private String location; //could be also city
+    private String address;
+
+
+
+
      public MyDbAdapter(Context context)
      {
          myhelper = new myDbHelper(context);
@@ -32,13 +51,8 @@ public class MyDbAdapter implements Serializable {
 
     //INSERT
 
-    //this is originally an example insert of one column. need one for each table TODO
-    //here data needs to be name, address, city
     public long insertDataJuvinile(String[] data)
     {
-        //String name=data[0];
-        //String address=data[1];
-        //String city=data[2];
 
         SQLiteDatabase dbb = myhelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -52,12 +66,7 @@ public class MyDbAdapter implements Serializable {
 
     public long insertDataEvents(String[] data)
     {
-        //String ejuvileid=data[0];
-        //String ename=data[1];
-        //String plannedStart=data[2];
-        //String plannedEnd=data[3];
-        //String minAge=data[4];
-        //String maxAge=data[5];
+
 
         SQLiteDatabase dbb = myhelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -75,10 +84,6 @@ public class MyDbAdapter implements Serializable {
 
     public long insertDataFeedback(String[] data)
     {
-        //String jeventid=data[0];
-        //String grade=data[1];
-        //String feedback=data[2];
-        //String participant=data[3];
 
         SQLiteDatabase dbb = myhelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -92,42 +97,17 @@ public class MyDbAdapter implements Serializable {
     }
 
 
-    //now this is for reading. should be interesting.
-    //below for table juvinile, need to make this generic for joins
-    /*
-    public String getJuvinileData()
-
-    {
-        SQLiteDatabase db = myhelper.getWritableDatabase();
-        String[] columns = {myDbHelper.UID,myDbHelper.TEXT,myDbHelper.TEXT2};
-        Cursor cursor =db.query(myDbHelper.TABLE_JUVINILE,columns,null,null,null,null,null);
-        StringBuffer buffer= new StringBuffer();
-        while (cursor.moveToNext())
-        {
-            int cid =cursor.getInt(cursor.getColumnIndex(myDbHelper.UID));
-            String tekstin =cursor.getString(cursor.getColumnIndex(myDbHelper.TEXT));
-            String  lisatekstin =cursor.getString(cursor.getColumnIndex(myDbHelper.TEXT2));
-            buffer.append(cid+ "   " + tekstin + "   " + lisatekstin +" \n");
-        }
-        return buffer.toString();
-    }*/
-
-
     //SELECT
 
     //lets fetch the list of JUVINILES
-    // - need to make one for events, which would be combining
-    //also need one for feedbacks concerning one event at  time
+
 
     public ArrayList<Juvinile> getJuvinileList() //the select query here as string parameter?
     {
 
         //list for storing the results
         ArrayList<Juvinile> juvinilesList = new ArrayList<Juvinile>();
-        Integer juvilineID;
-        String name="";
-        String location=""; //could be also city
-        String address="";
+
         String selectQuery = "SELECT * FROM " + myDbHelper.TABLE_JUVINILE; //suppose this could be generic and provided via string?
 
         SQLiteDatabase db = myhelper.getWritableDatabase();
@@ -138,13 +118,13 @@ public class MyDbAdapter implements Serializable {
                 Juvinile tempjuvi = new Juvinile();
 
                 //read the db
-                juvilineID=c.getInt(c.getColumnIndex(myDbHelper.JUVINILEID));
+                juvilineid=c.getInt(c.getColumnIndex(myDbHelper.JUVINILEID));
                 name=c.getString(c.getColumnIndex(myDbHelper.JUVINILENAME));
                 location=c.getString(c.getColumnIndex(myDbHelper.CITY));
                 address=c.getString(c.getColumnIndex(myDbHelper.ADDRESS));
 
                 //Assign the values to juviline object
-                tempjuvi.setJuvinileID(juvilineID);
+                tempjuvi.setJuvinileID(juvilineid);
                 tempjuvi.setAddress(address);
                 tempjuvi.setName(name);
                 tempjuvi.setCity(location);
@@ -164,6 +144,9 @@ public class MyDbAdapter implements Serializable {
 
         //list for storing the results
         ArrayList<JuvinileEvent> eventDataList = new ArrayList<JuvinileEvent>();
+
+       //TODO could remove the shit in comments
+        /*
         Integer eventid;
         Integer juvilineid;
         String juvilinename="";
@@ -176,16 +159,7 @@ public class MyDbAdapter implements Serializable {
         String active="";
         String starttime= "2010-01-01 00:00:00";
         String endtime= "2010-01-01 00:00:00";
-
-        //suppose this could be generic and provided via string?
-        //on the other hand does it matter where it's generated..
-        //CANT I REALLY USE JOINS, BUT HAVE TO GO THE OLD WAY??!!
-        /*String selectQuery = "SELECT * " +
-                "event.eventid, juvinile.juvinileid, juvinile.juvinilename, " +
-                "event.eventname, event.plannedstart, event.plannedend, event.minage, event.maxage, event.participants " +
-                "event.active, event.start, event.end " +
-                "FROM juvinile INNNER JOIN event on juvinile.juvinileid=event.juvinileid";
-        */
+*/
 
         String selectQuery = "SELECT " +
         myDbHelper.EVENTID + ", " +
@@ -254,18 +228,6 @@ public class MyDbAdapter implements Serializable {
 
         //list for storing the results
         ArrayList<JuvinileEvent> eventDataList = new ArrayList<JuvinileEvent>();
-        Integer eventid;
-        Integer juvilineid;
-        String juvilinename="";
-        String eventname="";
-        String plannedstarttime= "2010-01-01 00:00:00";
-        String plannedendtime= "2010-01-01 00:00:00";
-        Integer minage=0;
-        Integer maxage=0;
-        Integer participants=0;
-        String active="";
-        String starttime= "2010-01-01 00:00:00";
-        String endtime= "2010-01-01 00:00:00";
 
         //create the query
         String selectQuery = "SELECT " +
@@ -330,23 +292,11 @@ public class MyDbAdapter implements Serializable {
         return eventDataList;
     }
 
-    //SELECT ONE SINGLE EVENT
+    //  TODO SELECT ONE SINGLE EVENT xxx THIS IS NOT USED ANYMORE I THINK
     public JuvinileEvent getSingleEvent(Integer e_eventid) {
 
         //Variables for storing the results
         String[] s_eventid={Integer.toString(e_eventid)};
-        Integer eventid;
-        Integer juvilineid;
-        String juvilinename = "";
-        String eventname = "";
-        String plannedstarttime = "2010-01-01 00:00:00";
-        String plannedendtime = "2010-01-01 00:00:00";
-        Integer minage = 0;
-        Integer maxage = 0;
-        Integer participants = 0;
-        String active = "";
-        String starttime = "2010-01-01 00:00:00";
-        String endtime = "2010-01-01 00:00:00";
 
         //create the query
         String selectQuery = "SELECT " +
@@ -424,9 +374,7 @@ public class MyDbAdapter implements Serializable {
 
     //UPDATE
 
-    //Need many of these. 1 update juvinile, 2 update event, 3 update feedback
-    //or should we try and make one generic updater that only takes a fully prepared string as parameter
-    //below a version that simply updates the name of the juvinile, which is mainly useless
+    //update Juvinile data
     public int updateName(String oldText , String newText)
     {
         SQLiteDatabase db = myhelper.getWritableDatabase();
@@ -437,19 +385,33 @@ public class MyDbAdapter implements Serializable {
         return count; //paluukoodi jee
     }
 
-    public int updateJuvinileEventDetails(Integer event_id,String column,String new_value)
+    //update Juvinile data
+    public void updateJuvinileDetails(Integer juvinileid,String column,String new_value)
     {
         SQLiteDatabase db = myhelper.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(column,new_value);
-        contentValues.put(myDbHelper.EDBCHANGE, "DATETIME(TIMESTAMP, 'localtime')");
-        String[] whereArgs= {Integer.toString(event_id)};
-        int count =db.update(myDbHelper.TABLE_EVENT,contentValues, myDbHelper.EVENTID+" = ?",whereArgs );
-        return count; //paluukoodi jee
-
+        String sqlquery="UPDATE JUVINILE SET " + column + " = \'" + new_value + "\' , dbchange = DATETIME(CURRENT_TIMESTAMP, 'localtime') WHERE juvinileid = " + juvinileid  ;
+        System.out.println("SQL QUERY JUVINILE LASSI " + sqlquery);
+        Cursor c = db.rawQuery(sqlquery, null);
+        c.moveToFirst();
+        c.close();
     }
 
 
+    //update juvinile Event data
+    public void updateJuvinileEventDetails(Integer event_id,String column,String new_value)
+    {
+        SQLiteDatabase db = myhelper.getWritableDatabase();
+        String sqlquery="UPDATE EVENT SET " + column + " = \'" + new_value + "\' , dbchange = DATETIME(CURRENT_TIMESTAMP, 'localtime') WHERE eventid = " + event_id  ;
+        System.out.println("SQL QUERY EVENT LASSI " + sqlquery);
+        Cursor c = db.rawQuery(sqlquery, null);
+        c.moveToFirst();
+        c.close();
+    }
+
+
+
+
+    //table variables and DATABASE VERSION and name
     static class myDbHelper extends SQLiteOpenHelper {
         private static final String DATABASE_NAME = "playtodella4";    // Database Name
         private static final int DATABASE_Version = 4;    // Database Version
@@ -497,8 +459,8 @@ public class MyDbAdapter implements Serializable {
                         + JUVINILENAME + " VARCHAR(20),"
                         + ADDRESS + " VARCHAR(100), "
                         + CITY + " VARCHAR(20),"
-                        + JDBTIME + " DATETIME DEFAULT CURRENT_TIMESTAMP, "
-                        + JDBCHANGE + " DATETIME DEFAULT CURRENT_TIMESTAMP"
+                        + JDBTIME + " DATETIME DEFAULT DATETIME(CURRENT_TIMESTAMP, 'localtime'), "
+                        + JDBCHANGE + " DATETIME DEFAULT DATETIME(CURRENT_TIMESTAMP, 'localtime')"
                         + ");";
         private static final String DROP_TABLE_JUVINILE = "DROP TABLE IF EXISTS " + TABLE_JUVINILE;
 
@@ -509,15 +471,15 @@ public class MyDbAdapter implements Serializable {
                         + EJUVINILEID + " INTEGER NOT NULL, "
                         + EVENTNAME + " TEXT, "
                         + EVENTPLANNEDSTART + " DATETIME NOT NULL, "
-                        + EVENTPLANNEDEND + " DATETIME NOT NULL, " //could be not null as could the previous
+                        + EVENTPLANNEDEND + " DATETIME NOT NULL, "
                         + EVENTSTART + " DATETIME DEFAULT NULL, "
                         + EVENTEND + " DATETIME DEFAULT NULL,"
                         + MINAGE + " INTEGER, "
                         + MAXAGE + " INTEGER, "
                         + PARTICIPANTS_COUNT + " INTEGER DEFAULT 0, "
                         + ACTIVE + " TEXT, "
-                        + EDBTIME + " DATETIME DEFAULT CURRENT_TIMESTAMP, "
-                        + EDBCHANGE + " DATETIME DEFAULT CURRENT_TIMESTAMP "
+                        + EDBTIME + " DATETIME DEFAULT DATETIME(CURRENT_TIMESTAMP, 'localtime'), "
+                        + EDBCHANGE + " DATETIME DEFAULT DATETIME(CURRENT_TIMESTAMP, 'localtime') "
                         + ");";
         private static final String DROP_TABLE_EVENT = "DROP TABLE IF EXISTS " + TABLE_EVENT;
 
@@ -529,8 +491,8 @@ public class MyDbAdapter implements Serializable {
                         + GRADE + " INTEGER,"
                         + FEEDBACK + " TEXT, "
                         + PARTICIPANT + " TEXT DEFAULT 'Anonymous', "
-                        + FDBTIME + " DATETIME DEFAULT CURRENT_TIMESTAMP, "
-                        + FDBCHANGE + " DATETIME DEFAULT CURRENT_TIMESTAMP "
+                        + FDBTIME + " DATETIME DEFAULT DATETIME(CURRENT_TIMESTAMP, 'localtime'), "
+                        + FDBCHANGE + " DATETIME DEFAULT DATETIME(CURRENT_TIMESTAMP, 'localtime') "
                         + ");";
         private static final String DROP_TABLE_FEEDBACK = "DROP TABLE IF EXISTS " + TABLE_FEEDBACK;
 
@@ -544,16 +506,16 @@ public class MyDbAdapter implements Serializable {
 
         public void onCreate(SQLiteDatabase db) {
 
-            System.out.println("PITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISIPITÄISI");
+
 
             try {
                 db.execSQL(CREATE_TABLE_JUVINILE);
                 db.execSQL(CREATE_TABLE_EVENT);
                 db.execSQL(CREATE_TABLE_FEEDBACK);
-                System.out.println("tehtiinkohan jotain");
+
             } catch (Exception e) {
                 Message.message(context, "" + e);
-                System.out.println("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE" + e);
+
             }
         }
 

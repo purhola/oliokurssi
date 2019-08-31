@@ -185,7 +185,7 @@ public class AdminToolsActivity extends AppCompatActivity implements MyRecyclerV
 
     public void testEventRead(View v) {
 
-        long id=helper.updateJuvinileEventDetails(5,"eventname","paivitetty");
+        helper.updateJuvinileEventDetails(5,"eventname","paivitetty");
 
                 //JuvinileEvent jevent= new JuvinileEvent();
 

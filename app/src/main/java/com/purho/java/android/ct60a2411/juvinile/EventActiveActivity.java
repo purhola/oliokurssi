@@ -14,10 +14,9 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
 
     MyDbAdapter helper;
     JuvinileEvent jevent;
-    Integer eventid=0;
-    Button particb;
-    //Integer count=0;
-    //Integer participants;
+
+    private Button particb;
+    private long id;
 
 
     @Override
@@ -43,52 +42,52 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
     public void addParticipant(View x){
 
 
+        //check if the event is active
+        // if yes, get the participant count and add one
 
+        String isactive = jevent.getActive();
 
+        if(isactive.equals("yes")) {
+            jevent.setParticipants(jevent.getParticipants()+1);
+            Integer count=jevent.getParticipants();
+            particb.setText("Event active \n Participants \n" + Integer.toString(count));
+        }
+        else particb.setText("Event not active \n Participants so far\n" + Integer.toString(jevent.getParticipants()));
+    }
 
-        Integer count=jevent.getParticipants()+1;
+    public void activateEvent(View v) {
 
-        particb.setText(Integer.toString(count));
+        id=0;
 
-
-
-
+        jevent.setActive("yes");
+        helper.updateJuvinileEventDetails(jevent.getEventid(),"active","yes");
+        //particb.setTextColor(android.R.color.holo_green_dark);
+        particb.setText("Event active \n Participants \n" + Integer.toString(jevent.getParticipants()));
 
     }
 
-    public void startEvent(View v) {
+    public void deactivateEvent(View v) {
+
+        jevent.setActive("no");
+  //      long id = helper.updateJuvinileEventDetails(jevent.getEventid(),"active","no");
+        particb.setText("Event not active \n Participants so far\n" + Integer.toString(jevent.getParticipants()));
+    }
+
+    public void pauseEvent(View v) {
+
+        jevent.setActive("no");
+    //    long id = helper.updateJuvinileEventDetails(jevent.getEventid(),"active","no");
+        particb.setText("Event not active \n Participants so far\n" + Integer.toString(jevent.getParticipants()));
+    }
+
+    public void goToFeedback(View v){
+
+        Intent intent = new Intent(this, FeedBackActivity.class);
+        intent.putExtra("eventObject", (Serializable) jevent);
+        startActivity(intent);
 
 
     }
-
-    public void endEvent(View v) {
-
-
-    }
-
-
-   public void getSingleEventDatal(Integer eventid){
-
-
-        //create an object for the event data and get it from the DB
-
-       System.out.println("EVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDBBB " + eventid);
-
-        //jeventl= new JuvinileEvent();
-        //jeventl=helper.getSingleEvent(eventid);
-
-        //String eventplace=jevent.getJuvinilename(); //this goes to uneditable textview
-        //Integer eventid=jevent.getEventid();
-        //String eventname=jevent.getEventname();
-        //String plannedstart=jevent.getPlanned_start();
-        //String plannedend=jevent.getPlanned_end();
-        //Integer minage=jevent.getMinage();
-        //Integer maxage=jevent.getMaxage();
-        //participants=jeventl.getParticipants();
-
-}
-
-
 
 
 }

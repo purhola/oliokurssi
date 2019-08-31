@@ -24,7 +24,7 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
     EditText etminage;
     EditText etmaxage;
     EditText etparticcount;
-    Integer eventid;
+
 
 
     @Override
@@ -50,12 +50,10 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
         i.getSerializableExtra("eventObject");
         if (i.getSerializableExtra("eventObject") == null) {
             //jevent = new JuvinileEvent();
-            System.out.println("***************Can't find the event****************");
+            System.out.println("***************Can't find the event****************"); // TODO this could/should be something smarter, a msg or break or both..
         } else {
             jevent = (JuvinileEvent) i.getSerializableExtra("eventObject");
         }
-
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" + jevent.getEventname());
 
         setUpDisplay();
 
@@ -64,15 +62,7 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
 
     public void getSingleEventData(Integer eventid){
 
-        //create an object for the event data and get it from the DB
-
-        // jevent=helper.getSingleEvent(eventid); //we don't want to do this as the object should be already passed here
-
-
-
-
         String eventplace=jevent.getJuvinilename(); //this goes to uneditable textview
-        //Integer eventid=jevent.getEventid();
         String eventname=jevent.getEventname();
         String plannedstart=jevent.getPlanned_start();
         String plannedend=jevent.getPlanned_end();
@@ -117,7 +107,7 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
 
     public void updateEventDetails(View w) {
 
-        Integer ueventid= eventid;
+
         String eventname=eteventname.getText().toString();
         String plannedstart=etplannedstart.getText().toString();
         String plannedend=etplannedend.getText().toString();
@@ -136,12 +126,13 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
         //TODO should we make the DB updates from here or from the object itself..
         //create a message if any fail, also msg if all are saved ok
 
-        id=helper.updateJuvinileEventDetails(eventid,"eventname",jevent.getEventname());
-        id=helper.updateJuvinileEventDetails(eventid,"plannedstart",jevent.getPlanned_startDB());
-        id=helper.updateJuvinileEventDetails(eventid,"plannedend",jevent.getPlanned_endDB());
-        id=helper.updateJuvinileEventDetails(eventid,"minage", String.valueOf(jevent.getMinage()));
-        id=helper.updateJuvinileEventDetails(eventid,"maxage", String.valueOf(jevent.getMaxage()));
-        id=helper.updateJuvinileEventDetails(eventid,"participants", String.valueOf(jevent.getParticipants()));
+
+        helper.updateJuvinileEventDetails(jevent.getEventid(),"eventname",jevent.getEventname());
+        helper.updateJuvinileEventDetails(jevent.getEventid(),"plannedstart",jevent.getPlanned_startDB());
+        helper.updateJuvinileEventDetails(jevent.getEventid(),"plannedend",jevent.getPlanned_endDB());
+        helper.updateJuvinileEventDetails(jevent.getEventid(),"minage", String.valueOf(jevent.getMinage()));
+        helper.updateJuvinileEventDetails(jevent.getEventid(),"maxage", String.valueOf(jevent.getMaxage()));
+        helper.updateJuvinileEventDetails(jevent.getEventid(),"participants", String.valueOf(jevent.getParticipants()));
 
 
 
