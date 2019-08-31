@@ -374,7 +374,7 @@ public class MyDbAdapter implements Serializable {
 
     //UPDATE
 
-    //update Juvinile data
+    //update Juvinile data TODO remove the one below, not used
     public int updateName(String oldText , String newText)
     {
         SQLiteDatabase db = myhelper.getWritableDatabase();
@@ -408,7 +408,16 @@ public class MyDbAdapter implements Serializable {
         c.close();
     }
 
-
+    //update Feedbacks
+    public void updateFeedback(Integer feedbackid,String column,String new_value)
+    {
+        SQLiteDatabase db = myhelper.getWritableDatabase();
+        String sqlquery="UPDATE FEEDBACK SET " + column + " = \'" + new_value + "\' , dbchange = DATETIME(CURRENT_TIMESTAMP, 'localtime') WHERE feedbackid = " + feedbackid  ;
+        System.out.println("SQL QUERY EVENT LASSI " + sqlquery);
+        Cursor c = db.rawQuery(sqlquery, null);
+        c.moveToFirst();
+        c.close();
+    }
 
 
     //table variables and DATABASE VERSION and name

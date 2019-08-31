@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 
 import java.io.Serializable;
-import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class EventActiveActivity extends AppCompatActivity implements Serializable {
 
@@ -16,7 +18,7 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
     JuvinileEvent jevent;
 
     private Button particb;
-    private long id;
+
 
 
     @Override
@@ -24,8 +26,12 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_active);
 
-        String toparse;
+        helper = new MyDbAdapter(this);
+
+
         particb = (Button) findViewById(R.id.btnAddPartic);
+
+        particb.setText("Participant \n counter \n *Click me*");
 
         Intent i = getIntent();
         i.getSerializableExtra("passEventObjectLive");
@@ -47,7 +53,7 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
 
         String isactive = jevent.getActive();
 
-        if(isactive.equals("yes")) {
+        if(isactive.equals("YES")) {
             jevent.setParticipants(jevent.getParticipants()+1);
             Integer count=jevent.getParticipants();
             particb.setText("Event active \n Participants \n" + Integer.toString(count));
@@ -57,27 +63,53 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
 
     public void activateEvent(View v) {
 
-        id=0;
+        //Starting means activate + update start time
 
-        jevent.setActive("yes");
-        helper.updateJuvinileEventDetails(jevent.getEventid(),"active","yes");
-        //particb.setTextColor(android.R.color.holo_green_dark);
+        //create a timestamp for setting to the event
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String settime=now.format(df);
+
+        jevent.setStart_time(settime);
+        jevent.setActive("YES");
+
         particb.setText("Event active \n Participants \n" + Integer.toString(jevent.getParticipants()));
+
+        //update the db
+        helper.updateJuvinileEventDetails(jevent.getEventid(),"active","YES");
+        helper.updateJuvinileEventDetails(jevent.getEventid(),"start",settime);
 
     }
 
     public void deactivateEvent(View v) {
 
-        jevent.setActive("no");
-  //      long id = helper.updateJuvinileEventDetails(jevent.getEventid(),"active","no");
+        //stopping means deactivate + update end time
+
+        //create a timestamp for setting to the event
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String settime=now.format(df);
+
+        jevent.setEnd_time(settime);
+        jevent.setActive("NO");
+
         particb.setText("Event not active \n Participants so far\n" + Integer.toString(jevent.getParticipants()));
+
+        //update db
+        helper.updateJuvinileEventDetails(jevent.getEventid(),"active","NO");
+        helper.updateJuvinileEventDetails(jevent.getEventid(),"end",settime);
+
     }
 
     public void pauseEvent(View v) {
 
-        jevent.setActive("no");
-    //    long id = helper.updateJuvinileEventDetails(jevent.getEventid(),"active","no");
-        particb.setText("Event not active \n Participants so far\n" + Integer.toString(jevent.getParticipants()));
+        //pausing means deactivate + no touching to start and end
+        jevent.setActive("NO");
+        particb.setText("Event paused \n Participants so far\n" + Integer.toString(jevent.getParticipants()));
+
+        //update db
+        helper.updateJuvinileEventDetails(jevent.getEventid(),"active","NO");
+
     }
 
     public void goToFeedback(View v){
@@ -88,6 +120,7 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
 
 
     }
+
 
 
 }

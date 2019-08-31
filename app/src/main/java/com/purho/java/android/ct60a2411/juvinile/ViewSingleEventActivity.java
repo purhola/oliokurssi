@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.Serializable;
-import java.util.Scanner;
+
 
 public class ViewSingleEventActivity extends AppCompatActivity implements Serializable {
 
@@ -146,6 +146,9 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
 
     }
 
+    public void viewFeedbacks(View v) {
 
+        //TODO add code here
+    }
 
 }

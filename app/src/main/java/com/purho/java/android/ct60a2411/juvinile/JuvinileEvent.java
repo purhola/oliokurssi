@@ -50,11 +50,16 @@ public class JuvinileEvent implements Serializable {
         //this.juvinileid=null; //hopefully we get this from the parameters. we can also use sql and the juvinile name, np.
         this.juvinilename=juvinilename;
         this.eventname=eventname;
+
+        //TODO the timestamps must be changed from what they are when given.
+
         this.planned_start=planned_start;
         this.planned_end=planned_end;
+
+
         this.minage=minage;
         this.maxage=maxage;
-        this.active="no";
+        this.active="NO";
         this.participants=0;
         this.start_time=null;
         this.end_time=null;
