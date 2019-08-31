@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 ////compileStatement(String sql)
 //Pass sql statement as a parameter in string the format.
 
-public class MyDbAdapter {
+public class MyDbAdapter implements Serializable {
 
     myDbHelper myhelper;
 

@@ -1,6 +1,8 @@
 package com.purho.java.android.ct60a2411.juvinile;
 
-class Juvinile {
+import java.io.Serializable;
+
+class Juvinile implements Serializable {
 
     private Integer juvinileID;
     private String name;

@@ -1,13 +1,14 @@
 package com.purho.java.android.ct60a2411.juvinile;
 
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-public class JuvinileEvent {
+public class JuvinileEvent implements Serializable {
 
     private Integer eventid;
     private Integer juvinileid;

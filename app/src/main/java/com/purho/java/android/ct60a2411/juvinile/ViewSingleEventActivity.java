@@ -8,9 +8,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class ViewSingleEventActivity extends AppCompatActivity {
+public class ViewSingleEventActivity extends AppCompatActivity implements Serializable {
 
     MyDbAdapter helper;
     JuvinileEvent jevent;
@@ -33,7 +34,17 @@ public class ViewSingleEventActivity extends AppCompatActivity {
 
         helper = new MyDbAdapter(this);
 
-        //This is all about retracting the juvinile-eventid in order to fetch correct data.
+        Intent i = getIntent();
+            i.getSerializableExtra("eventObject");
+            if(i.getSerializableExtra("eventObject") == null) {
+                jevent= new JuvinileEvent();
+            } else {
+                jevent = (JuvinileEvent)i.getSerializableExtra("eventObject");
+            }
+
+        System.out.println("JEVENTNAME JEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAMEJEVENTNAME:" + jevent.getEventname() );
+
+       /* //This is all about retracting the juvinile-eventid in order to fetch correct data.
         String toparse;
         tveventplace= findViewById(R.id.tvPlace);
         eteventname= findViewById(R.id.etEventName);
@@ -58,7 +69,7 @@ public class ViewSingleEventActivity extends AppCompatActivity {
         //and here it is
         eventid=sc.nextInt();
         getSingleEventData(eventid);
-
+        */
     }
 
 
@@ -129,7 +140,7 @@ public class ViewSingleEventActivity extends AppCompatActivity {
     public void goLive(View v) {
 
         Intent intent = new Intent(this,EventActiveActivity.class);
-        intent.putExtra("event_id", Integer.toString(eventid));
+        intent.putExtra("passEventObjectLive", jevent);
         startActivity(intent);
 
     }

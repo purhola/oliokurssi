@@ -2,16 +2,18 @@ package com.purho.java.android.ct60a2411.juvinile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class EventActiveActivity extends AppCompatActivity {
+public class EventActiveActivity extends AppCompatActivity implements Serializable {
 
     MyDbAdapter helper;
-    JuvinileEvent jeventl;
+    JuvinileEvent jevent;
     Integer eventid=0;
     Button particb;
     Integer count;
@@ -25,6 +27,15 @@ public class EventActiveActivity extends AppCompatActivity {
 
         String toparse;
 
+        Intent i = getIntent();
+        i.getSerializableExtra("passEventObjectLive");
+        if(i.getSerializableExtra("passEventObjectLive") == null) {
+            jevent= new JuvinileEvent();
+        } else {
+            jevent = (JuvinileEvent)i.getSerializableExtra("passEventObjectLive");
+        }
+
+        /*
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
@@ -40,8 +51,8 @@ public class EventActiveActivity extends AppCompatActivity {
         //and here it is
         eventid=sc.nextInt();
         System.out.println("EVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTIDEVENTID " + eventid);
-        getSingleEventDatal(eventid); //TODO. ei tykkää hakea tässä tuota!!
-
+  //      getSingleEventDatal(eventid); //TODO. ei tykkää hakea tässä tuota!!
+*/
 
     }
 

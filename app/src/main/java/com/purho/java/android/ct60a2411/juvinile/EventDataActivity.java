@@ -10,12 +10,15 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class EventDataActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
+public class EventDataActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener, Serializable {
 
     MyDbAdapter helper;
     MyRecyclerViewAdapter adapter;
+    //array for the JuvinileEvent objects
+    ArrayList<JuvinileEvent> juvinileEventArray; // = new ArrayList<JuvinileEvent>();
 
     TextView events;
 
@@ -31,13 +34,16 @@ public class EventDataActivity extends AppCompatActivity implements MyRecyclerVi
 
         //let's make this so that it only fetches upcoming events
         //array for the JuvinileEvent objects
-        ArrayList<JuvinileEvent> juvinileEventArray = new ArrayList<JuvinileEvent>();
+        //ArrayList<JuvinileEvent> juvinileEventArray = new ArrayList<JuvinileEvent>();
+
         //temp array for displaying the event data
         ArrayList<String> tempEventArray = new ArrayList<>();
         //temp string for filling the temp array
         String tempArrayFill="";
 
-        juvinileEventArray = helper.getNewEventData(); // dbadapetrin metodi
+        juvinileEventArray = helper.getNewEventData(); // method in dbadapter to fetch upcoming events
+
+        System.out.println("ARRAY ARRAY size in oncreate: " + juvinileEventArray.size()); //TODO this has been filled below, but for some reason not usable here!!
 
         //fill the array
         for (JuvinileEvent tempevent:juvinileEventArray){
@@ -52,44 +58,16 @@ public class EventDataActivity extends AppCompatActivity implements MyRecyclerVi
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 
-
-
-
-
-
-
-
-
-    }
-
-
-    @Override
-    public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
-        System.out.println("ja positiohan on" + position);
-        //TODO how can we get to the line clicked!!! need the id from there at least.. best would be if we could just move to a new place (ylläpito) directly
-
-
-
-        Intent intent = new Intent(this, ViewSingleEventActivity.class);
-        intent.putExtra("eventidrow", adapter.getItem(position));
-        startActivity(intent);
-
-
-
-
-
     }
 
     public void fetchAgain(View v) {
-        //array for the JuvinileEvent objects
-        ArrayList<JuvinileEvent> juvinileEventArray = new ArrayList<JuvinileEvent>();
+
         //temp array for displaying the event data
         ArrayList<String> tempEventArray = new ArrayList<>();
         //temp string for filling the temp array
         String tempArrayFill="";
 
-        juvinileEventArray = helper.getEventData(); // dbadapetrin metodi
+        juvinileEventArray = helper.getEventData(); // method in dbadapter to fetch all events
 
         //fill the array
         for (JuvinileEvent tempevent:juvinileEventArray){
@@ -109,7 +87,20 @@ public class EventDataActivity extends AppCompatActivity implements MyRecyclerVi
     }
 
 
+    //@Override
+    public void onItemClick(View view, int position) {
+        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
 
+        //new object fo passing the selected event
+        JuvinileEvent passEventObject = new JuvinileEvent();
+
+        passEventObject=juvinileEventArray.get(position);
+
+        //open the next activity and pass the selected event
+        Intent intent = new Intent(this, ViewSingleEventActivity.class);
+        intent.putExtra("eventObject", (Serializable) passEventObject);
+        startActivity(intent);
+    }
 
 
 
