@@ -148,7 +148,9 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
 
     public void viewFeedbacks(View v) {
 
-        //TODO add code here
+        Intent intent = new Intent(this,ViewEventFeedBacksActivity.class);
+        intent.putExtra("passEventObjectLive", jevent);
+        startActivity(intent);
     }
 
 }
