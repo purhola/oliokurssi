@@ -46,7 +46,7 @@ public class EventDataActivity extends AppCompatActivity implements MyRecyclerVi
 
         //fill the array
         for (JuvinileEvent tempevent:juvinileEventArray){
-            tempArrayFill=tempevent.getEventid() +"   "+ tempevent.getJuvinilename() +" " + tempevent.getEventname() +" "+ tempevent.getPlanned_start(); //this means the timestamp needs to be configured in the getter
+            tempArrayFill=tempevent.getJuvinilename() +" " + tempevent.getEventname() +" "+ tempevent.getPlanned_start(); //this means the timestamp needs to be configured in the getter
             tempEventArray.add(tempArrayFill);
         }
 
@@ -70,7 +70,7 @@ public class EventDataActivity extends AppCompatActivity implements MyRecyclerVi
 
         //fill the array
         for (JuvinileEvent tempevent:juvinileEventArray){
-            tempArrayFill=tempevent.getEventid() +"   "+tempevent.getJuvinilename() +" " + tempevent.getEventname() +" "+ tempevent.getPlanned_start(); //this means the timestamp needs to be configured in the getter
+            tempArrayFill=tempevent.getJuvinilename() +" " + tempevent.getEventname() +" "+ tempevent.getPlanned_start(); //this means the timestamp needs to be configured in the getter
             tempEventArray.add(tempArrayFill);
         }
 
