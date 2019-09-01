@@ -3,9 +3,12 @@ package com.purho.java.android.ct60a2411.juvinile;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.Serializable;
 
@@ -15,9 +18,15 @@ public class FeedBackActivity extends AppCompatActivity implements Serializable 
     JuvinileEvent jevent;
     EventFeedBack feedback;
 
-    private EditText feedback;
+    private EditText txtfeedback;
     private EditText grade;
     private EditText name;
+    private TextView txtviewgrade;
+
+    private String[] sqlargs;
+
+    private Button btnsavefeedback;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +35,11 @@ public class FeedBackActivity extends AppCompatActivity implements Serializable 
 
         helper = new MyDbAdapter(this);
 
-        feedback=(EditText) findViewById(R.id.etFeedBack);
+        txtfeedback=(EditText) findViewById(R.id.etFeedBack);
         grade=(EditText) findViewById(R.id.etGrade);
         name=(EditText) findViewById(R.id.etName);
+        btnsavefeedback=(Button) findViewById(R.id.btnSaveFeedBack);
+        txtviewgrade=(TextView) findViewById(R.id.tvGrade);
 
 
         Intent i = getIntent();
@@ -46,6 +57,41 @@ public class FeedBackActivity extends AppCompatActivity implements Serializable 
 
     //TODO save to object, save to db
     // notify, that feedback is given
+
+        String strfeedback;
+        String strgrade;
+        String strname;
+
+
+        strgrade=grade.getText().toString();
+
+
+        if (strgrade.equals("1") || strgrade.equals("2") ||strgrade.equals("3") ||strgrade.equals("4") ||strgrade.equals("5")){
+            strfeedback = txtfeedback.getText().toString();
+            if (strfeedback == null || strfeedback.isEmpty()) {
+                strfeedback = "";
+            }
+
+            strname = name.getText().toString();
+            if (strname == null || strname.isEmpty() || "Name".equals(strname)) {
+                strname = "Anonymous";
+            }
+
+            //create a new object for this feedback
+            feedback = new EventFeedBack(jevent.getEventid(), strgrade, strfeedback, strname);
+            //
+            sqlargs = new String[]{Integer.toString(feedback.getEventid()), feedback.getGrade(), feedback.getFeedback(), feedback.getFbgiver()};
+
+
+            helper.insertDataFeedback(sqlargs);
+            btnsavefeedback.setText("Saved");
+            btnsavefeedback.setTextColor(Color.GRAY);
+        }
+        else {
+            txtviewgrade.setTextColor(Color.RED);
+        }
+
+
 
     }
 

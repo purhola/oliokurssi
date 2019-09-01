@@ -2,6 +2,7 @@ package com.purho.java.android.ct60a2411.juvinile;
 
 class EventFeedBack {
 
+    private Integer feedbackid;
     private Integer eventid;
     private String grade;
     private String feedback;
@@ -9,6 +10,7 @@ class EventFeedBack {
 
     public EventFeedBack() {
 
+        this.feedbackid=0;
         this.eventid=0;
         this.grade="";
         this.feedback="";
@@ -18,6 +20,7 @@ class EventFeedBack {
 
     public EventFeedBack(Integer eventid,String grade,String feedback,String fbgiver) {
 
+        this.feedbackid=0;
         this.eventid=eventid;
         this.grade=grade;
         this.feedback=feedback;
@@ -55,5 +58,13 @@ class EventFeedBack {
 
     public void setFbgiver(String fbgiver) {
         this.fbgiver = fbgiver;
+    }
+
+    public Integer getFeedbackid() {
+        return feedbackid;
+    }
+
+    public void setFeedbackid(Integer feedbackid) {
+        this.feedbackid = feedbackid;
     }
 }

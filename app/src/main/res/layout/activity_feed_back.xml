@@ -18,12 +18,13 @@
         app:layout_constraintHorizontal_bias="0.232"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.591" />
+        app:layout_constraintVertical_bias="0.625" />
 
     <Button
-        android:id="@+id/button13"
+        android:id="@+id/btnSaveFeedBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="saveFeedBack"
         android:text="Save feedback"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,13 +61,13 @@
         app:layout_constraintVertical_bias="0.101" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvGrade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Grade"
+        android:text="Grade (1-5, mandatory)"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintHorizontal_bias="0.173"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.047" />
