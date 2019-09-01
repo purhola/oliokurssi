@@ -60,13 +60,12 @@ public class MyDbAdapter implements Serializable {
         contentValues.put(myDbHelper.ADDRESS, data[1]);
         contentValues.put(myDbHelper.CITY, data[2]);
 
-        long insert = dbb.insert(myDbHelper.TABLE_JUVINILE, null , contentValues);
+        long insert = dbb.replace(myDbHelper.TABLE_JUVINILE, null , contentValues);
         return insert;
     }
 
     public long insertDataEvents(String[] data)
     {
-
 
         SQLiteDatabase dbb = myhelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -100,8 +99,6 @@ public class MyDbAdapter implements Serializable {
     //SELECT
 
     //lets fetch the list of JUVINILES
-
-
     public ArrayList<Juvinile> getJuvinileList() //the select query here as string parameter?
     {
 
@@ -144,22 +141,6 @@ public class MyDbAdapter implements Serializable {
 
         //list for storing the results
         ArrayList<JuvinileEvent> eventDataList = new ArrayList<JuvinileEvent>();
-
-       //TODO could remove the shit in comments
-        /*
-        Integer eventid;
-        Integer juvilineid;
-        String juvilinename="";
-        String eventname="";
-        String plannedstarttime= "2010-01-01 00:00:00";
-        String plannedendtime= "2010-01-01 00:00:00";
-        Integer minage=0;
-        Integer maxage=0;
-        Integer participants=0;
-        String active="";
-        String starttime= "2010-01-01 00:00:00";
-        String endtime= "2010-01-01 00:00:00";
-*/
 
         String selectQuery = "SELECT " +
         myDbHelper.EVENTID + ", " +
@@ -423,7 +404,7 @@ public class MyDbAdapter implements Serializable {
     //table variables and DATABASE VERSION and name
     static class myDbHelper extends SQLiteOpenHelper {
         private static final String DATABASE_NAME = "playtodella4";    // Database Name
-        private static final int DATABASE_Version = 4;    // Database Version
+        private static final int DATABASE_Version = 7;    // Database Version
 
         //table juvinile
         private static final String TABLE_JUVINILE = "juvinile";   // table juvinile as in nuorisotila
@@ -468,9 +449,13 @@ public class MyDbAdapter implements Serializable {
                         + JUVINILENAME + " VARCHAR(20),"
                         + ADDRESS + " VARCHAR(100), "
                         + CITY + " VARCHAR(20),"
-                        + JDBTIME + " DATETIME DEFAULT DATETIME(CURRENT_TIMESTAMP, 'localtime'), "
-                        + JDBCHANGE + " DATETIME DEFAULT DATETIME(CURRENT_TIMESTAMP, 'localtime')"
+                        + JDBTIME + " DATETIME DEFAULT CURRENT_TIMESTAMP, "
+                        + JDBCHANGE + " DATETIME DEFAULT CURRENT_TIMESTAMP"
                         + ");";
+
+
+        private static final String CREATE_INDEX_JUVINILE = "CREATE UNIQUE INDEX idx_juvinile_name ON JUVINILE (name);";
+
         private static final String DROP_TABLE_JUVINILE = "DROP TABLE IF EXISTS " + TABLE_JUVINILE;
 
         //sentences to handle table event
@@ -487,8 +472,8 @@ public class MyDbAdapter implements Serializable {
                         + MAXAGE + " INTEGER, "
                         + PARTICIPANTS_COUNT + " INTEGER DEFAULT 0, "
                         + ACTIVE + " TEXT, "
-                        + EDBTIME + " DATETIME DEFAULT DATETIME(CURRENT_TIMESTAMP, 'localtime'), "
-                        + EDBCHANGE + " DATETIME DEFAULT DATETIME(CURRENT_TIMESTAMP, 'localtime') "
+                        + EDBTIME + " DATETIME DEFAULT CURRENT_TIMESTAMP, "
+                        + EDBCHANGE + " DATETIME DEFAULT CURRENT_TIMESTAMP "
                         + ");";
         private static final String DROP_TABLE_EVENT = "DROP TABLE IF EXISTS " + TABLE_EVENT;
 
@@ -500,8 +485,8 @@ public class MyDbAdapter implements Serializable {
                         + GRADE + " INTEGER,"
                         + FEEDBACK + " TEXT, "
                         + PARTICIPANT + " TEXT DEFAULT 'Anonymous', "
-                        + FDBTIME + " DATETIME DEFAULT DATETIME(CURRENT_TIMESTAMP, 'localtime'), "
-                        + FDBCHANGE + " DATETIME DEFAULT DATETIME(CURRENT_TIMESTAMP, 'localtime') "
+                        + FDBTIME + " DATETIME DEFAULT CURRENT_TIMESTAMP, "
+                        + FDBCHANGE + " DATETIME DEFAULT CURRENT_TIMESTAMP "
                         + ");";
         private static final String DROP_TABLE_FEEDBACK = "DROP TABLE IF EXISTS " + TABLE_FEEDBACK;
 
@@ -521,6 +506,7 @@ public class MyDbAdapter implements Serializable {
                 db.execSQL(CREATE_TABLE_JUVINILE);
                 db.execSQL(CREATE_TABLE_EVENT);
                 db.execSQL(CREATE_TABLE_FEEDBACK);
+                db.execSQL(CREATE_INDEX_JUVINILE);
 
             } catch (Exception e) {
                 Message.message(context, "" + e);

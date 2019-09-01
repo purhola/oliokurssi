@@ -9,11 +9,20 @@ class Juvinile implements Serializable {
     private String city;
     private String address;
 
-    public void Juvinile(){
-        juvinileID=0;
-        name="";
-        city="";
-        address="";
+    public Juvinile(){
+        this.juvinileID=0;
+        this.name="";
+        this.city="";
+        this.address="";
+
+    }
+
+    public Juvinile(String name,String city,String address) {
+
+        this.juvinileID=0;
+        this.name=name;
+        this.city=city;
+        this.address=address;
 
     }
 
