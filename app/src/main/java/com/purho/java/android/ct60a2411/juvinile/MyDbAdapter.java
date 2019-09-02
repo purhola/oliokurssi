@@ -450,8 +450,8 @@ public class MyDbAdapter implements Serializable {
 
     //table variables and DATABASE VERSION and name
     static class myDbHelper extends SQLiteOpenHelper {
-        private static final String DATABASE_NAME = "playtodella4";    // Database Name
-        private static final int DATABASE_Version = 8;    // Database Version
+        private static final String DATABASE_NAME = "playtodellax";    // Database Name
+        private static final int DATABASE_Version = 1;    // Database Version
 
         //table juvinile
         private static final String TABLE_JUVINILE = "juvinile";   // table juvinile as in nuorisotila

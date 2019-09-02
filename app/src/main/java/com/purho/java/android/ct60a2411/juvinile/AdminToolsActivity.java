@@ -75,17 +75,18 @@ public class AdminToolsActivity extends AppCompatActivity implements MyRecyclerV
         String[] juviniledata = new String[3];
         String[] eventdata = new String[7];
         String[] feedbackdata = new String[4];
-        System.out.println("populateInit1 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" );
 
-        //String name=juviniledata[0];
-        //String address=juviniledata[1];
-        //String city=juviniledata[2];
 
-        //First location
-        juviniledata[0]="Betoni";juviniledata[1]="Harmaatie 12";juviniledata[2]="Kouvola";
+        //First location. These could've been assigned differently, but now it's done like this
+        juviniledata[0]="Betoniviidakko";juviniledata[1]="Harmaatie 12";juviniledata[2]="Kouvola";
         insertInitJuv(juviniledata);
         //Second loc
-        juviniledata[0]="Nistilä";juviniledata[1]="Neulakuja 9 A 67";juviniledata[2]="Wanda";
+        juviniledata[0]="Vantaan huoltotila";juviniledata[1]="Neulakuja 9 A 67";juviniledata[2]="Wanda";
+        insertInitJuv(juviniledata);
+        //and so on
+        juviniledata[0]="Lappeen nuorisovankila";juviniledata[1]="Konnunsuontie 101";juviniledata[2]="lappeen Ranta";
+        insertInitJuv(juviniledata);
+        juviniledata[0]="Ivalon kylmäkammio";juviniledata[1]="Igluhotelli 2";juviniledata[2]="Hanko";
         insertInitJuv(juviniledata);
 
 
@@ -98,19 +99,17 @@ public class AdminToolsActivity extends AppCompatActivity implements MyRecyclerV
         //String active=data[6];
 
         //First Event
-        eventdata[0]="1";eventdata[1]="Ykskemut";eventdata[2]="2019-08-29 14:30:00";eventdata[3]="2109-08-29 16:30:00";eventdata[4]="10";eventdata[5]="12";eventdata[6]="NO";
+        eventdata[0]="1";eventdata[1]="Itsehillintää";eventdata[2]="2019-08-29 14:30:00";eventdata[3]="2109-08-29 16:30:00";eventdata[4]="15";eventdata[5]="16";eventdata[6]="NO";
         insertInitEvent(eventdata);
         //Second event
-        eventdata[0]="1";eventdata[1]="Kakskemut";eventdata[2]="2019-08-30 16:30:00";eventdata[3]="2109-08-29 22:30:00";eventdata[4]="15";eventdata[5]="18";eventdata[6]="NO";
+        eventdata[0]="1";eventdata[1]="Siivousharjoituksia";eventdata[2]="2019-08-30 16:30:00";eventdata[3]="2109-08-29 22:30:00";eventdata[4]="10";eventdata[5]="11";eventdata[6]="NO";
         insertInitEvent(eventdata);
 
-        eventdata[0]="1";eventdata[1]="Kolmekemut";eventdata[2]="2019-08-31 16:30:00";eventdata[3]="2109-08-29 22:30:00";eventdata[4]="15";eventdata[5]="18";eventdata[6]="NO";
+        eventdata[0]="1";eventdata[1]="Epämehu rock";eventdata[2]="2019-09-20 16:30:00";eventdata[3]="2109-09-22 22:30:00";eventdata[4]="15";eventdata[5]="18";eventdata[6]="NO";
         insertInitEvent(eventdata);
 
-        eventdata[0]="1";eventdata[1]="Nelkemut";eventdata[2]="2019-09-01 16:30:00";eventdata[3]="2109-08-29 22:30:00";eventdata[4]="15";eventdata[5]="18";eventdata[6]="NO";
+        eventdata[0]="1";eventdata[1]="Ohjaajien pikkujoulut";eventdata[2]="2019-09-12 16:30:00";eventdata[3]="2109-09-22 22:30:00";eventdata[4]="15";eventdata[5]="18";eventdata[6]="NO";
         insertInitEvent(eventdata);
-
-
 
 
         //String jeventid=data[0];
@@ -122,26 +121,26 @@ public class AdminToolsActivity extends AppCompatActivity implements MyRecyclerV
         feedbackdata[0]="1";feedbackdata[1]="2";feedbackdata[2]="Ihan totaalista kuraa";feedbackdata[3]="Anon";
         insertInitFeedB(feedbackdata);
         //Second feedback
-        feedbackdata[0]="2";feedbackdata[1]="5";feedbackdata[2]="Ihan mehua";feedbackdata[3]= null;
+        feedbackdata[0]="2";feedbackdata[1]="5";feedbackdata[2]="Hyvin meni mutta oisitte ees yrittäny näyttää iloisilta";feedbackdata[3]= null;
+        insertInitFeedB(feedbackdata);
+        //and so on
+        feedbackdata[0]="4";feedbackdata[1]="4";feedbackdata[2]="Hitsin jee";feedbackdata[3]= null;
+        insertInitFeedB(feedbackdata);
+        feedbackdata[0]="1";feedbackdata[1]="1";feedbackdata[2]="Kun ei osaa niin ei osaa.";feedbackdata[3]= null;
         insertInitFeedB(feedbackdata);
 
 
     }
 
     public void insertInitJuv(String[] data){
-        System.out.println("insert1   juvi YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+
         long id = helper.insertDataJuvinile(data);
         if(id<=0)
         {
             Message.message(getApplicationContext(),"Juvinile Insertion Unsuccessful");
-            //Name.setText("");
-            System.out.println("JUVI INSERTION UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
-            //Pass.setText("");
         } else
         {
             Message.message(getApplicationContext(),"Juvinile Insertion Successful");
-            //Name.setText("");
-            //Pass.setText("");
         }
 
 
