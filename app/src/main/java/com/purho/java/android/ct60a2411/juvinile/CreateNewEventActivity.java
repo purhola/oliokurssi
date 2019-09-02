@@ -13,7 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CreateNewEventActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
 
@@ -27,6 +30,12 @@ public class CreateNewEventActivity extends AppCompatActivity implements MyRecyc
     ArrayList<String> tempJuvinileArray;
 
     TextView location;
+    TextView tvname;
+    TextView tvstart;
+    TextView tvend;
+    TextView tvminage;
+    TextView tvmaxage;
+
     EditText eventname;
     EditText starttime;
     EditText endtime;
@@ -47,7 +56,15 @@ public class CreateNewEventActivity extends AppCompatActivity implements MyRecyc
         setContentView(R.layout.activity_create_new_event);
 
         location= (TextView) findViewById(R.id.tvLocation);
-        eventname= (EditText) findViewById(R.id.etEventName);
+
+        tvname= (TextView) findViewById(R.id.tvNewEventName);
+        tvstart= (TextView) findViewById(R.id.tvPlannedStart);
+        tvend= (TextView) findViewById(R.id.tvPlannedEnd);
+        tvminage= (TextView) findViewById(R.id.tvMinAge);
+        tvmaxage= (TextView) findViewById(R.id.tvMaxAge);
+
+
+        eventname= (EditText) findViewById(R.id.etNewEventName);
         starttime=(EditText) findViewById(R.id.etStartTime);
         endtime=(EditText) findViewById(R.id.etEndTime);
         minage=(EditText) findViewById(R.id.etMinAge);
@@ -99,46 +116,90 @@ public class CreateNewEventActivity extends AppCompatActivity implements MyRecyc
     public void saveEvent(View v) {
 
         //integer which will be set to 1 if required info is missing -> do nothing until ok.
+        //if a data is null or empty mark the corresponding textview red
         Integer error=0;
 
         //check and read the information line by line
+        if(location.getText().toString() != null && !location.getText().toString().trim().isEmpty())
+        {}
+        else {location.setTextColor(Color.RED);error=1;}
+
         if( eventname.getText().toString() != null && !eventname.getText().toString().trim().isEmpty())
-            String evname=eventname.getText().toString();
-        else {eventname.setTextColor(Color.RED); error=1;}
+            evname=eventname.getText().toString();
+        else {tvname.setTextColor(Color.RED); error=1;}
 
         if( starttime.getText().toString() != null && !starttime.getText().toString().trim().isEmpty())
-            String plannedstime=starttime.getText().toString();
-        else {starttime.setTextColor(Color.RED); error=1;}
+            plannedstime=starttime.getText().toString();
+        else {tvstart.setTextColor(Color.RED); error=1;}
 
         if( endtime.getText().toString() != null && !endtime.getText().toString().trim().isEmpty())
-            String plannedetime=endtime.getText().toString();
-        else {endtime.setTextColor(Color.RED); error=1;}
+            plannedetime=endtime.getText().toString();
+        else {tvend.setTextColor(Color.RED); error=1;}
 
         if( minage.getText().toString() != null && !minage.getText().toString().trim().isEmpty())
-            String strminage=minage.getText().toString();
-        else {minage.setTextColor(Color.RED); error=1;}
+            strminage=minage.getText().toString();
+        else {tvminage.setTextColor(Color.RED); error=1;}
 
         if( maxage.getText().toString() != null && !maxage.getText().toString().trim().isEmpty())
-            String strmaxage=maxage.getText().toString();
-        else {maxage.setTextColor(Color.RED); error=1;}
-
+            strmaxage=maxage.getText().toString();
+        else {tvmaxage.setTextColor(Color.RED); error=1;}
 
         juvinilename= juvinileArray.get(posofjuvi).getName();
+        String strjuvinileid = Integer.toString(juvinileArray.get(posofjuvi).getJuvinileID());
+
+        SimpleDateFormat dforig = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dftarg = new SimpleDateFormat("dd.MM.yy HH:mm");
+
+        String start_to_object="";
+        String end_to_object="";
+
+        try {
+            Date tempStart  = dftarg.parse(plannedstime);
+            start_to_object=dforig.format(tempStart);
+
+        } catch (ParseException ex) {System.out.println("DateConversionFailed in createnewactivity");}
+        finally {}
+
+        try {
+            Date tempEnd  = dftarg.parse(plannedetime);
+            end_to_object=dforig.format(tempEnd);
+
+        } catch (ParseException ex) {System.out.println("DateConversionFailed");}
+        finally {}
 
 
-        JuvinileEvent createEvent= new JuvinileEvent(juvinilename,evname,plannedstime,plannedetime,Integer.parseInt(strminage),Integer.parseInt(strmaxage);
+
+
+
+
+        if(error==0) {
+            //create new JuvinileEvent object
+            JuvinileEvent createEvent= new JuvinileEvent(juvinilename,evname,plannedstime,plannedetime,Integer.parseInt(strminage),Integer.parseInt(strmaxage));
+
+            //write the db
+            String[] sqlargs={strjuvinileid,evname,start_to_object,end_to_object,strminage,strmaxage,"NO"};
+            //System.out.println("SQL STRINGI " + sqlargs.toString());
+            helper.insertDataEvents(sqlargs);
+
+
+           /* er.EJUVINILEID, data[0]); //needs to figured out by now
+            contentValues.put(myDbHelper.EVENTNAME, data[1]);
+            contentValues.put(myDbHelper.EVENTPLANNEDSTART, data[2]);
+            contentValues.put(myDbHelper.EVENTPLANNEDEND, data[3]);
+            contentValues.put(myDbHelper.MINAGE, data[4]);
+            contentValues.put(myDbHelper.MAXAGE, data[5]);
+            contentValues.put(myDbHelper.ACTIVE, data[6]);
+
+
+            */
 
 
 
 
 
+        }
 
 
-
-        //create new JuvinileEvent object
-
-
-        //write the db
 
     }
 

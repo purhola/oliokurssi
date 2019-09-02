@@ -51,10 +51,36 @@ public class JuvinileEvent implements Serializable {
         this.juvinilename=juvinilename;
         this.eventname=eventname;
 
-        //TODO the timestamps must be changed from what they are when given.
 
-        this.planned_start=planned_start;
-        this.planned_end=planned_end;
+        //here we want to change from dd.mm.yy hh:mm to yyyy-mm-dd hh:mm:ss
+        SimpleDateFormat dforig = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dftarg = new SimpleDateFormat("dd.MM.yy HH:mm");
+
+        String planned_to_object="";
+
+        try {
+            Date tempStart  = dftarg.parse(planned_start);
+            planned_to_object=dforig.format(tempStart);
+
+        } catch (ParseException ex) {System.out.println("DateConversionFailed in creating juvinileEvent object");}
+        finally {}
+
+        System.out.println("PVM NÄYTTÄÄ " + planned_to_object.toString());
+
+        this.planned_start = planned_to_object;
+
+        //here we want to change from dd.mm.yy hh:mm to yyyy-mm-dd hh:mm:ss
+
+
+
+        try {
+            Date tempEnd  = dftarg.parse(planned_end);
+            planned_to_object=dforig.format(tempEnd);
+
+        } catch (ParseException ex) {System.out.println("DateConversionFailed");}
+        finally {}
+
+        this.planned_end = planned_to_object;
 
 
         this.minage=minage;
