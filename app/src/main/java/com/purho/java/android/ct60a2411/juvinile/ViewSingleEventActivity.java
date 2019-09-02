@@ -13,17 +13,17 @@ import java.io.Serializable;
 
 public class ViewSingleEventActivity extends AppCompatActivity implements Serializable {
 
-    MyDbAdapter helper;
-    JuvinileEvent jevent;
+    private MyDbAdapter helper;
+    private JuvinileEvent jevent;
 
 
-    TextView tveventplace;
-    EditText eteventname;
-    EditText etplannedstart;
-    EditText etplannedend;
-    EditText etminage;
-    EditText etmaxage;
-    EditText etparticcount;
+    private TextView tveventplace;
+    private EditText eteventname;
+    private EditText etplannedstart;
+    private EditText etplannedend;
+    private EditText etminage;
+    private EditText etmaxage;
+    private EditText etparticcount;
 
 
 
@@ -42,9 +42,6 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
         etminage = (EditText) findViewById(R.id.etMinAge);
         etmaxage = (EditText) findViewById(R.id.etMaxAge);
         etparticcount = (EditText) findViewById(R.id.etParticCount);
-
-
-
 
         Intent i = getIntent();
         i.getSerializableExtra("eventObject");

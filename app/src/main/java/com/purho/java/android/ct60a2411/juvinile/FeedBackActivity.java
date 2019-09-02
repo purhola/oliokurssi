@@ -14,9 +14,9 @@ import java.io.Serializable;
 
 public class FeedBackActivity extends AppCompatActivity implements Serializable {
 
-    MyDbAdapter helper;
-    JuvinileEvent jevent;
-    EventFeedBack feedback;
+    private MyDbAdapter helper;
+    private JuvinileEvent jevent;
+    private EventFeedBack feedback;
 
     private EditText txtfeedback;
     private EditText grade;

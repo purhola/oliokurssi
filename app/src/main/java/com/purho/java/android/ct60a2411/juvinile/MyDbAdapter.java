@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class MyDbAdapter implements Serializable {
 
-    myDbHelper myhelper;
+    private myDbHelper myhelper;
 
     private Integer eventid;
     private Integer juvilineid;

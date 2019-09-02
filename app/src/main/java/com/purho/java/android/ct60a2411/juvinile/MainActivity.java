@@ -13,10 +13,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
 
-    MyDbAdapter helper;
-    MyRecyclerViewAdapter adapter;
+    private MyDbAdapter helper;
+    private MyRecyclerViewAdapter adapter;
     //array for the JuvinileEvent objects
-    ArrayList<JuvinileEvent> juvinileEventArray; // = new ArrayList<JuvinileEvent>();
+    private ArrayList<JuvinileEvent> juvinileEventArray; // = new ArrayList<JuvinileEvent>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

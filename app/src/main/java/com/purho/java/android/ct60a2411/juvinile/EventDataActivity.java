@@ -15,12 +15,12 @@ import java.util.ArrayList;
 
 public class EventDataActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener, Serializable {
 
-    MyDbAdapter helper;
-    MyRecyclerViewAdapter adapter;
+    private MyDbAdapter helper;
+    private MyRecyclerViewAdapter adapter;
     //array for the JuvinileEvent objects
-    ArrayList<JuvinileEvent> juvinileEventArray; // = new ArrayList<JuvinileEvent>();
+    private ArrayList<JuvinileEvent> juvinileEventArray; // = new ArrayList<JuvinileEvent>();
 
-    TextView events;
+    private TextView events;
 
 
     @Override

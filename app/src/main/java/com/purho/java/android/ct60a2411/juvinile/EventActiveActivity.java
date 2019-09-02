@@ -14,8 +14,8 @@ import java.time.format.DateTimeFormatter;
 
 public class EventActiveActivity extends AppCompatActivity implements Serializable {
 
-    MyDbAdapter helper;
-    JuvinileEvent jevent;
+    private MyDbAdapter helper;
+    private JuvinileEvent jevent;
 
     private Button particb;
 

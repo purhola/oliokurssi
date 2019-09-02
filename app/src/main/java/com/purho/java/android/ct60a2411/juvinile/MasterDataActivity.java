@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class MasterDataActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener , Serializable {
 
-    MyRecyclerViewAdapter adapter;
-    MyDbAdapter helper;
+    private MyRecyclerViewAdapter adapter;
+    private MyDbAdapter helper;
 
     private EditText juvinilename;
     private EditText juvinilecity;
@@ -30,7 +30,7 @@ public class MasterDataActivity extends AppCompatActivity implements MyRecyclerV
     private  ArrayList<Juvinile> juvinileArray;
 
     //temp string for filling the temp array
-    String tempArrayFill;
+    private String tempArrayFill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -22,31 +22,31 @@ import java.util.Date;
 public class CreateNewEventActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
 
 
-    MyDbAdapter helper;
-    MyRecyclerViewAdapter adapter;
+    private MyDbAdapter helper;
+    private MyRecyclerViewAdapter adapter;
     //array for the Juvinile objects
-    ArrayList<Juvinile> juvinileArray;
-    Juvinile tempjuvi;
+    private ArrayList<Juvinile> juvinileArray;
+    private Juvinile tempjuvi;
     //temp array for displaying the Juviniles
-    ArrayList<String> tempJuvinileArray;
+    private ArrayList<String> tempJuvinileArray;
 
-    TextView location;
-    TextView tvname;
-    TextView tvstart;
-    TextView tvend;
-    TextView tvminage;
-    TextView tvmaxage;
+    private TextView location;
+    private TextView tvname;
+    private TextView tvstart;
+    private TextView tvend;
+    private TextView tvminage;
+    private TextView tvmaxage;
 
-    EditText eventname;
-    EditText starttime;
-    EditText endtime;
-    EditText minage;
-    EditText maxage;
-    Integer posofjuvi;
-    String juvinilename;
+    private EditText eventname;
+    private EditText starttime;
+    private EditText endtime;
+    private EditText minage;
+    private EditText maxage;
+    private Integer posofjuvi;
+    private String juvinilename;
 
     //temp variables for checking and saving the given text
-    String evname,plannedstime,plannedetime,strminage,strmaxage;
+    private String evname,plannedstime,plannedetime,strminage,strmaxage;
 
 
 

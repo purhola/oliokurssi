@@ -16,15 +16,15 @@ import java.util.ArrayList;
 
 public class ViewEventFeedBacksActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener, Serializable {
 
-    MyRecyclerViewAdapter adapter;
-    MyDbAdapter helper;
-    JuvinileEvent jevent;
-    EventFeedBack singleFeedBack;
-    ArrayList<EventFeedBack> feedBacksArray;
+    private MyRecyclerViewAdapter adapter;
+    private MyDbAdapter helper;
+    private JuvinileEvent jevent;
+    private EventFeedBack singleFeedBack;
+    private ArrayList<EventFeedBack> feedBacksArray;
 
-    TextView tvfbgiver;
-    TextView tvgrade;
-    EditText edtfeedback;
+    private TextView tvfbgiver;
+    private TextView tvgrade;
+    private EditText edtfeedback;
 
 
     @Override
