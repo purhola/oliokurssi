@@ -75,6 +75,8 @@ public class CreateNewEventActivity extends AppCompatActivity implements MyRecyc
 
         helper = new MyDbAdapter(this);
 
+        posofjuvi=0;
+
         //events= (TextView) findViewById(R.id.tvEventsDisplayed);
 
 
@@ -115,7 +117,7 @@ public class CreateNewEventActivity extends AppCompatActivity implements MyRecyc
 
     }
 
-    public void saveEvent(View v) {
+    public void saveEvent(View v) {  //TODO this fails if the fields are initially left empty
 
         //integer which will be set to 1 if required info is missing -> do nothing until ok.
         //if a data is null or empty mark the corresponding textview red
@@ -146,6 +148,7 @@ public class CreateNewEventActivity extends AppCompatActivity implements MyRecyc
             strmaxage=maxage.getText().toString();
         else {tvmaxage.setTextColor(Color.RED); error=1;}
 
+        if(error==0) {
         juvinilename= juvinileArray.get(posofjuvi).getName();
         String strjuvinileid = Integer.toString(juvinileArray.get(posofjuvi).getJuvinileID());
 
@@ -174,7 +177,7 @@ public class CreateNewEventActivity extends AppCompatActivity implements MyRecyc
 
 
 
-        if(error==0) {
+
             //create new JuvinileEvent object
             JuvinileEvent createEvent= new JuvinileEvent(juvinilename,evname,plannedstime,plannedetime,Integer.parseInt(strminage),Integer.parseInt(strmaxage));
 
