@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +55,7 @@ public class CreateNewEventActivity extends AppCompatActivity implements MyRecyc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_event);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN); //or SOFT_INPUT_ADJUST_NOTHING)
 
         location= (TextView) findViewById(R.id.tvLocation);
 
@@ -180,22 +182,6 @@ public class CreateNewEventActivity extends AppCompatActivity implements MyRecyc
             String[] sqlargs={strjuvinileid,evname,start_to_object,end_to_object,strminage,strmaxage,"NO"};
             //System.out.println("SQL STRINGI " + sqlargs.toString());
             helper.insertDataEvents(sqlargs);
-
-
-           /* er.EJUVINILEID, data[0]); //needs to figured out by now
-            contentValues.put(myDbHelper.EVENTNAME, data[1]);
-            contentValues.put(myDbHelper.EVENTPLANNEDSTART, data[2]);
-            contentValues.put(myDbHelper.EVENTPLANNEDEND, data[3]);
-            contentValues.put(myDbHelper.MINAGE, data[4]);
-            contentValues.put(myDbHelper.MAXAGE, data[5]);
-            contentValues.put(myDbHelper.ACTIVE, data[6]);
-
-
-            */
-
-
-
-
 
         }
 

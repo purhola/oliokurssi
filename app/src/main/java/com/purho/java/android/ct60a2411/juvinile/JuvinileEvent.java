@@ -65,7 +65,6 @@ public class JuvinileEvent implements Serializable {
         } catch (ParseException ex) {System.out.println("DateConversionFailed in creating juvinileEvent object");}
         finally {}
 
-        System.out.println("PVM NÄYTTÄÄ " + planned_to_object.toString());
 
         this.planned_start = planned_to_object;
 
