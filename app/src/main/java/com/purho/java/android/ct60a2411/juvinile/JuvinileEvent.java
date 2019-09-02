@@ -26,7 +26,7 @@ public class JuvinileEvent implements Serializable {
     private String eventinsertSQL;
 
 
-    public void JuvinileEvent() {
+    public JuvinileEvent() {
 
         this.eventid=0;
         this.juvinileid=0;
@@ -45,7 +45,7 @@ public class JuvinileEvent implements Serializable {
     }
 
     //alla sais olla myös juvilineid, katotaan
-    public void JuvinileEvent(String juvinilename, String eventname,String planned_start, String planned_end,Integer minage,Integer maxage) {
+    public JuvinileEvent(String juvinilename, String eventname,String planned_start, String planned_end,Integer minage,Integer maxage) {
 
         //this.juvinileid=null; //hopefully we get this from the parameters. we can also use sql and the juvinile name, np.
         this.juvinilename=juvinilename;

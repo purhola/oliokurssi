@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.io.Serializable;
+import java.net.Inet4Address;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -40,6 +41,11 @@ public class MyDbAdapter implements Serializable {
     private String name;
     private String location; //could be also city
     private String address;
+    private Integer feedbackid;
+    private Integer grade;
+    private String feedback;
+
+
 
 
 
@@ -86,10 +92,10 @@ public class MyDbAdapter implements Serializable {
 
         SQLiteDatabase dbb = myhelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(myDbHelper.JEVENTID, data[0]); //needs to figured out by now
+        contentValues.put(myDbHelper.JEVENTID, data[0]);
         contentValues.put(myDbHelper.GRADE, data[1]);
         contentValues.put(myDbHelper.FEEDBACK, data[2]);
-        contentValues.put(myDbHelper.PARTICIPANT, data[3]); //default Anonymous gets perhaps overwritten if this is null, so needs to be figured out by this time
+        contentValues.put(myDbHelper.PARTICIPANT, data[3]);
 
         long insert = dbb.insert(myDbHelper.TABLE_FEEDBACK, null , contentValues);
         return insert;
@@ -105,7 +111,7 @@ public class MyDbAdapter implements Serializable {
         //list for storing the results
         ArrayList<Juvinile> juvinilesList = new ArrayList<Juvinile>();
 
-        String selectQuery = "SELECT * FROM " + myDbHelper.TABLE_JUVINILE; //suppose this could be generic and provided via string?
+        String selectQuery = "SELECT * FROM " + myDbHelper.TABLE_JUVINILE;
 
         SQLiteDatabase db = myhelper.getWritableDatabase();
         Cursor c = db.rawQuery(selectQuery,null);
@@ -273,7 +279,7 @@ public class MyDbAdapter implements Serializable {
         return eventDataList;
     }
 
-    //  TODO SELECT ONE SINGLE EVENT xxx THIS IS NOT USED ANYMORE I THINK
+    //  TODO SELECT ONE SINGLE EVENT xxx THIS IS NOT USED ANYMORE
     public JuvinileEvent getSingleEvent(Integer e_eventid) {
 
         //Variables for storing the results
@@ -341,6 +347,47 @@ public class MyDbAdapter implements Serializable {
         return tempevent;
     }
 
+    //***********************************************************************************************************************
+    //SELECT FEEDBACKS
+    public ArrayList<EventFeedBack> getEventFeedBacks(Integer eventid){
+
+        //Variables for storing the results
+        String[] s_eventid={Integer.toString(eventid)};
+        ArrayList<EventFeedBack> feedBackList = new ArrayList<EventFeedBack>();
+
+        String selectQuery = "SELECT * FROM " + myDbHelper.TABLE_FEEDBACK + " WHERE " + myDbHelper.JEVENTID + " = " +
+        s_eventid + " ORDER BY DBTIME ASC";
+
+        SQLiteDatabase db = myhelper.getWritableDatabase();
+        Cursor c = db.rawQuery(selectQuery,null);
+        //go through the whole table
+        if(c.moveToFirst()) {
+            do {
+                EventFeedBack tempfeedback = new EventFeedBack();
+
+                //read the db
+
+                feedbackid=c.getInt(c.getColumnIndex(myDbHelper.FEEDBACKID));
+                grade=c.getInt(c.getColumnIndex(myDbHelper.GRADE));
+                feedback=c.getString(c.getColumnIndex(myDbHelper.FEEDBACK));
+                name=c.getString(c.getColumnIndex(myDbHelper.PARTICIPANT));
+
+                //Assign the values to a feedback object
+                tempfeedback.setEventid(eventid);
+                tempfeedback.setFeedbackid(feedbackid);
+                tempfeedback.setGrade(Integer.toString(grade));
+                tempfeedback.setFeedback(feedback);
+                tempfeedback.setFbgiver(name);
+
+                //add the object to the list
+                feedBackList.add(tempfeedback);
+            } while (c.moveToNext());
+            Log.d("array",feedBackList.toString());
+        }
+        return feedBackList;
+
+    }
+
     //DELETE
 
     //need many of these, or preferably make this delete a more generic taking only a fully prepared sql as parameter
@@ -404,7 +451,7 @@ public class MyDbAdapter implements Serializable {
     //table variables and DATABASE VERSION and name
     static class myDbHelper extends SQLiteOpenHelper {
         private static final String DATABASE_NAME = "playtodella4";    // Database Name
-        private static final int DATABASE_Version = 7;    // Database Version
+        private static final int DATABASE_Version = 8;    // Database Version
 
         //table juvinile
         private static final String TABLE_JUVINILE = "juvinile";   // table juvinile as in nuorisotila
@@ -454,7 +501,7 @@ public class MyDbAdapter implements Serializable {
                         + ");";
 
 
-        private static final String CREATE_INDEX_JUVINILE = "CREATE UNIQUE INDEX idx_juvinile_name ON JUVINILE (name);";
+        private static final String CREATE_INDEX_JUVINILE = "CREATE UNIQUE INDEX idx_juvinile_name ON JUVINILE (juvinileid, name);";
 
         private static final String DROP_TABLE_JUVINILE = "DROP TABLE IF EXISTS " + TABLE_JUVINILE;
 

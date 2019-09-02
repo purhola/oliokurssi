@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewEventFeedBacksActivity"></activity>
+        <activity android:name=".CreateNewEventActivity"></activity>
+        <activity android:name=".ViewEventFeedBacksActivity" />
         <activity android:name=".FeedBackActivity" />
         <activity android:name=".EventActive" />
         <activity android:name=".AdminTools" />

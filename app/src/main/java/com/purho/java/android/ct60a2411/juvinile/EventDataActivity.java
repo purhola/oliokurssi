@@ -101,7 +101,15 @@ public class EventDataActivity extends AppCompatActivity implements MyRecyclerVi
         startActivity(intent);
     }
 
+    public void createNewEvent(View v) {
 
+        //open the next activity and pass the selected event
+        Intent intent = new Intent(this, CreateNewEventActivity.class);
+        startActivity(intent);
+
+
+
+    }
 
 
 

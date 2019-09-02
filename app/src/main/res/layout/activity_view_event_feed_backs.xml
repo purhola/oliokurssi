@@ -6,4 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ViewEventFeedBacksActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFeedBack"
+        android:layout_width="345dp"
+        android:layout_height="269dp"
+        android:scrollbars="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.067" />
 </androidx.constraintlayout.widget.ConstraintLayout>
