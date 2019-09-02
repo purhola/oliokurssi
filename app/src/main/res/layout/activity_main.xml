@@ -9,13 +9,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Events today"
+        android:text="Upcoming events"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.176"
+        app:layout_constraintHorizontal_bias="0.13"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.351" />
+        app:layout_constraintVertical_bias="0.353" />
 
     <Button
         android:id="@+id/btnLocations"
@@ -47,6 +47,7 @@
         android:id="@+id/btnNewEvent"
         android:layout_width="143dp"
         android:layout_height="48dp"
+        android:onClick="activity_new_event"
         android:text="New event"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,22 +58,24 @@
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="76dp"
+        android:layout_width="98dp"
+        android:layout_height="33dp"
+        android:layout_marginBottom="36dp"
         android:onClick="activity_admin_tools"
         android:text="Admin/populate"
+        android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFrontPage"
         android:layout_width="222dp"
         android:layout_height="213dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.306"
+        app:layout_constraintHorizontal_bias="0.206"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.565" />
+        app:layout_constraintVertical_bias="0.61" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,18 +7,6 @@
     tools:context=".CreateNewEventActivity">
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create a new event"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.134"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
-
-    <TextView
         android:id="@+id/tvSelectPlace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,14 +45,13 @@
         android:id="@+id/tvNewEventName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:text="Event Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.116"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLocation"
-        app:layout_constraintVertical_bias="0.017" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.29" />
 
     <TextView
         android:id="@+id/tvMaxAge"
@@ -169,16 +156,14 @@
 
     <TextView
         android:id="@+id/tvLocation"
-        android:layout_width="291dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="17dp"
-        android:text="Location, name, address, city"
+        android:layout_width="277dp"
+        android:layout_height="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.325"
+        app:layout_constraintHorizontal_bias="0.283"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvLocations"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.23" />
 
     <EditText
         android:id="@+id/etNewEventName"
@@ -189,8 +174,8 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.196"
+        app:layout_constraintHorizontal_bias="0.191"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

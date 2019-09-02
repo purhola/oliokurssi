@@ -33,8 +33,6 @@ public class EventDataActivity extends AppCompatActivity implements MyRecyclerVi
         events= (TextView) findViewById(R.id.tvEventsDisplayed);
 
         //let's make this so that it only fetches upcoming events
-        //array for the JuvinileEvent objects
-        //ArrayList<JuvinileEvent> juvinileEventArray = new ArrayList<JuvinileEvent>();
 
         //temp array for displaying the event data
         ArrayList<String> tempEventArray = new ArrayList<>();
@@ -103,7 +101,7 @@ public class EventDataActivity extends AppCompatActivity implements MyRecyclerVi
 
     public void createNewEvent(View v) {
 
-        //open the next activity and pass the selected event
+        //open the next activity
         Intent intent = new Intent(this, CreateNewEventActivity.class);
         startActivity(intent);
 

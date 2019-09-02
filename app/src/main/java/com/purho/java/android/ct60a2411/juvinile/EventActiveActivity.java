@@ -93,7 +93,7 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
         jevent.setEnd_time(settime);
         jevent.setActive("NO");
 
-        particb.setText("Event not active \n Participants so far\n" + Integer.toString(jevent.getParticipants()));
+        particb.setText("Event ended \n Participants so far\n" + Integer.toString(jevent.getParticipants()));
 
         //update db
         helper.updateJuvinileEventDetails(jevent.getEventid(),"active","NO");
