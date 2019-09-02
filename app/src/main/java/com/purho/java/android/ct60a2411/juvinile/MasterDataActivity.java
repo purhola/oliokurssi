@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.Serializable;
@@ -22,6 +24,7 @@ public class MasterDataActivity extends AppCompatActivity implements MyRecyclerV
     private EditText juvinileaddress;
     private Integer juvinileid;
     private Integer arrayposition;
+    private TextView tvName;
 
     //arraylist for getting the juviniles
     private  ArrayList<Juvinile> juvinileArray;
@@ -39,8 +42,9 @@ public class MasterDataActivity extends AppCompatActivity implements MyRecyclerV
         juvinilename=(EditText) findViewById(R.id.etJname);
         juvinilecity=(EditText) findViewById(R.id.etJcity);
         juvinileaddress=(EditText) findViewById(R.id.etJaddress);
+        tvName= (TextView) findViewById(R.id.textView);
         juvinileid=0;
-        arrayposition=-1;
+        arrayposition=0; //might be the same as it will be but doesn't actually matter
         tempArrayFill="";
 
         //temp array for displaying the event data
@@ -86,15 +90,33 @@ public class MasterDataActivity extends AppCompatActivity implements MyRecyclerV
 
     public void createOrUpdateJuvinile(View v) {
 
-        long id=0;
+        long insertid=0;
+        //Integer juvilineid=0;
 
-        //if a name is given
-        //update straigth to the database with "replace"
-        //fetch the object list again after that
-        String checkname=juvinilename.getText().toString();
-        if(checkname != null && !checkname.isEmpty()) {
+        //if the name on the line is the same clicked -> update. else insert a new one
+        if(juvinileArray.get(arrayposition).getName().equals(juvinilename.getText().toString())){
+
+            //updating the object itself is sort of useless because we're going to create new ones. let's do it for practice anyway..
+            juvinileArray.get(arrayposition).setCity(juvinilecity.getText().toString());
+            juvinileArray.get(arrayposition).setAddress(juvinileaddress.getText().toString());
+
+            helper.updateJuvinileDetails(juvinileArray.get(arrayposition).getJuvinileID(),"city",juvinilecity.getText().toString());
+            helper.updateJuvinileDetails(juvinileArray.get(arrayposition).getJuvinileID(),"address",juvinileaddress.getText().toString());
+        }
+        else if (juvinilename.getText().toString() != null && !juvinilename.getText().toString().trim().isEmpty() ){
+
+            Juvinile newJuvinile = new Juvinile(juvinilename.getText().toString(),juvinilecity.getText().toString(),juvinileaddress.getText().toString());
+
             String[] sqlargs = {juvinilename.getText().toString(), juvinileaddress.getText().toString(), juvinilecity.getText().toString()};
-            id = helper.insertDataJuvinile(sqlargs);
+            insertid = helper.insertDataJuvinile(sqlargs);
+
+        }
+        else {
+            tvName.setTextColor(Color.RED);
+            System.out.println("nothing to do");
+
+        }
+            //TODO this should only be done if either of the previous ones is done
 
             juvinileArray = helper.getJuvinileList(); // method in dbadapter to fetch upcoming events
 
@@ -116,42 +138,8 @@ public class MasterDataActivity extends AppCompatActivity implements MyRecyclerV
         }
 
 
-
-        //to update or to make a new one. easier for the database..
-        //let's just do it to the base and get them again.
-
-        /*
-        //mietis tämä nyt oikein.
-        //jos lisätään uutta tai jos päivitetään vanhaa.
-        //kantaan tulee aina uusi jos nimi vaihtuu, pitäisi siis varmaan myös
-        //tehdä uusi olio.
-
-        ArrayList<String> names = new ArrayList<>();
-        String tempname="";
-
-        //check if the given name (Juvinile) already exists
-        for (int i=0;i=juvinileArray.size()-1;i++){
-            tempname=juvinileArray.get(i).getName();
-            names.add(tempname);
-        }
-
-        boolean cont = names.contains(juvinilename.getText().toString());
-
-        //if it exists -> update
-
-
-        //insert new juviline
-        if(juvinileid == 0 || juvilin) {
-          //juvinileArray.get(arrayposition).setName();
-
-        }
-
-        //else if ()
-        //Juvinile newJuvinile= new Juvinile()
-*/
-
     }
 
     //would be nice to have transition to events of a certain location
 
-}
+

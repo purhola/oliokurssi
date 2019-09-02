@@ -89,7 +89,7 @@ public class CreateNewEventActivity extends AppCompatActivity implements MyRecyc
 
         //fill the array
         for (Juvinile tempjuvi:juvinileArray){
-            tempArrayFill=tempjuvi.getName() +" " + tempjuvi.getAddress() +" "+ tempjuvi.getCity();
+            tempArrayFill=tempjuvi.getName() +", " + tempjuvi.getAddress() +" "+ tempjuvi.getCity();
             tempJuvinileArray.add(tempArrayFill);
         }
 

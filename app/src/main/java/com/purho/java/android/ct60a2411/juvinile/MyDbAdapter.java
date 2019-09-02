@@ -66,7 +66,7 @@ public class MyDbAdapter implements Serializable {
         contentValues.put(myDbHelper.ADDRESS, data[1]);
         contentValues.put(myDbHelper.CITY, data[2]);
 
-        long insert = dbb.replace(myDbHelper.TABLE_JUVINILE, null , contentValues);
+        long insert = dbb.insert(myDbHelper.TABLE_JUVINILE, null , contentValues);
         return insert;
     }
 
@@ -553,7 +553,7 @@ public class MyDbAdapter implements Serializable {
                 db.execSQL(CREATE_TABLE_JUVINILE);
                 db.execSQL(CREATE_TABLE_EVENT);
                 db.execSQL(CREATE_TABLE_FEEDBACK);
-                db.execSQL(CREATE_INDEX_JUVINILE);
+                //db.execSQL(CREATE_INDEX_JUVINILE);
 
             } catch (Exception e) {
                 Message.message(context, "" + e);
