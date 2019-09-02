@@ -356,7 +356,7 @@ public class MyDbAdapter implements Serializable {
         ArrayList<EventFeedBack> feedBackList = new ArrayList<EventFeedBack>();
 
         String selectQuery = "SELECT * FROM " + myDbHelper.TABLE_FEEDBACK + " WHERE " + myDbHelper.JEVENTID + " = " +
-        s_eventid + " ORDER BY DBTIME ASC";
+        eventid + " ORDER BY DBTIME ASC";
 
         SQLiteDatabase db = myhelper.getWritableDatabase();
         Cursor c = db.rawQuery(selectQuery,null);
@@ -371,6 +371,8 @@ public class MyDbAdapter implements Serializable {
                 grade=c.getInt(c.getColumnIndex(myDbHelper.GRADE));
                 feedback=c.getString(c.getColumnIndex(myDbHelper.FEEDBACK));
                 name=c.getString(c.getColumnIndex(myDbHelper.PARTICIPANT));
+                //coalesce broke the db cursor, so let's do it here.
+                if(name == null) name="Anonymous";
 
                 //Assign the values to a feedback object
                 tempfeedback.setEventid(eventid);
@@ -384,6 +386,7 @@ public class MyDbAdapter implements Serializable {
             } while (c.moveToNext());
             Log.d("array",feedBackList.toString());
         }
+        c.close();
         return feedBackList;
 
     }
