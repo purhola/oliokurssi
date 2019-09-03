@@ -185,7 +185,9 @@ public class MyDbAdapter implements Serializable {
                 participants= c.getInt(c.getColumnIndex(myDbHelper.PARTICIPANTS_COUNT));
                 active= c.getString(c.getColumnIndex(myDbHelper.ACTIVE));
                 starttime= c.getString(c.getColumnIndex(myDbHelper.EVENTSTART));
+                if(starttime == null) starttime="";
                 endtime= c.getString(c.getColumnIndex(myDbHelper.EVENTEND));
+                if(endtime == null) endtime="";
 
                 //Assign the values to eventdata object
                 tempevent.setEventid(eventid);
@@ -255,7 +257,9 @@ public class MyDbAdapter implements Serializable {
                 participants= c.getInt(c.getColumnIndex(myDbHelper.PARTICIPANTS_COUNT));
                 active= c.getString(c.getColumnIndex(myDbHelper.ACTIVE));
                 starttime= c.getString(c.getColumnIndex(myDbHelper.EVENTSTART));
+                if(starttime == null) starttime="";
                 endtime= c.getString(c.getColumnIndex(myDbHelper.EVENTEND));
+                if(endtime == null) endtime="";
 
                 //Assign the values to eventdata object
                 tempevent.setEventid(eventid);
@@ -324,7 +328,9 @@ public class MyDbAdapter implements Serializable {
                 participants = c.getInt(c.getColumnIndex(myDbHelper.PARTICIPANTS_COUNT));
                 active = c.getString(c.getColumnIndex(myDbHelper.ACTIVE));
                 starttime = c.getString(c.getColumnIndex(myDbHelper.EVENTSTART));
+                if(starttime == null) starttime="";
                 endtime = c.getString(c.getColumnIndex(myDbHelper.EVENTEND));
+                if(endtime == null) endtime="";
 
                 //Assign the values to eventdata object
                 tempevent.setEventid(eventid);

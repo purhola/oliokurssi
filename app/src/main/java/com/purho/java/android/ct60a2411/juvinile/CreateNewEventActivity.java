@@ -182,7 +182,7 @@ public class CreateNewEventActivity extends AppCompatActivity implements MyRecyc
             JuvinileEvent createEvent= new JuvinileEvent(juvinilename,evname,plannedstime,plannedetime,Integer.parseInt(strminage),Integer.parseInt(strmaxage));
 
             //write the db
-            String[] sqlargs={strjuvinileid,evname,start_to_object,end_to_object,strminage,strmaxage,"NO"};
+            String[] sqlargs={strjuvinileid,evname,createEvent.getPlanned_startDB(),createEvent.getPlanned_endDB(),strminage,strmaxage,"NO"};
             //System.out.println("SQL STRINGI " + sqlargs.toString());
             helper.insertDataEvents(sqlargs);
 

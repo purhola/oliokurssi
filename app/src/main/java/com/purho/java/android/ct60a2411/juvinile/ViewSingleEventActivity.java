@@ -3,6 +3,7 @@ package com.purho.java.android.ct60a2411.juvinile;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -24,6 +25,8 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
     private EditText etminage;
     private EditText etmaxage;
     private EditText etparticcount;
+    private TextView realstart;
+    private TextView realend;
 
 
 
@@ -42,6 +45,8 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
         etminage = (EditText) findViewById(R.id.etMinAge);
         etmaxage = (EditText) findViewById(R.id.etMaxAge);
         etparticcount = (EditText) findViewById(R.id.etParticCount);
+        realend = (TextView) findViewById(R.id.tvRealEndTime);
+        realstart = (TextView) findViewById(R.id.tvRealStartTime);
 
         Intent i = getIntent();
         i.getSerializableExtra("eventObject");
@@ -56,7 +61,7 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
 
     }
 
-
+/*
     public void getSingleEventData(Integer eventid){
 
         String eventplace=jevent.getJuvinilename(); //this goes to uneditable textview
@@ -79,6 +84,8 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
 
     }
 
+ */
+
     public void setUpDisplay(){
 
 
@@ -98,6 +105,8 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
         etminage.setText(Integer.toString(minage));
         etmaxage.setText(Integer.toString(maxage));
         etparticcount.setText(Integer.toString(participants));
+        realstart.setText(jevent.getStart_time());
+        realend.setText(jevent.getEnd_time());
     }
 
 
@@ -131,15 +140,20 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
         helper.updateJuvinileEventDetails(jevent.getEventid(),"maxage", String.valueOf(jevent.getMaxage()));
         helper.updateJuvinileEventDetails(jevent.getEventid(),"participants", String.valueOf(jevent.getParticipants()));
 
+        setUpDisplay();
+
 
 
     }
 
     public void goLive(View v) {
 
+        if(jevent.getEnd_time().trim().isEmpty()) {
+
         Intent intent = new Intent(this,EventActiveActivity.class);
         intent.putExtra("passEventObjectLive", jevent);
-        startActivity(intent);
+        startActivity(intent);}
+        else realend.setTextColor(Color.RED);
 
     }
 

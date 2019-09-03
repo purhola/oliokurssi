@@ -258,11 +258,21 @@ public class JuvinileEvent implements Serializable {
 
     public void setStart_time(String start_time) {
 
+        this.start_time = start_time;
+
+    }
+
+    public void setStart_time() {
+
         //here we want to take the current timestamp so we don't actually need the input parameter
 
-        LocalDateTime start = LocalDateTime.now();
+                LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String settime=now.format(df);
 
-        this.start_time = start.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+
+        this.start_time = settime;
 
     }
 
@@ -287,9 +297,15 @@ public class JuvinileEvent implements Serializable {
 
     public void setEnd_time(String end_time) {
 
-        LocalDateTime stop = LocalDateTime.now();
+        this.end_time =end_time;
+    }
 
-        this.end_time = stop.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    public void setEnd_time() {
+
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String settime=now.format(df);
+        this.end_time = settime;
     }
 
     public Integer getEventid() {

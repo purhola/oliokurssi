@@ -70,7 +70,7 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String settime=now.format(df);
 
-        jevent.setStart_time(settime);
+        jevent.setStart_time();
         jevent.setActive("YES");
 
         particb.setText("Event active \n Participants \n" + Integer.toString(jevent.getParticipants()));
@@ -85,12 +85,12 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
 
         //stopping means deactivate + update end time
 
-        //create a timestamp for setting to the event
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String settime=now.format(df);
+       // create a timestamp for setting to the event
+       LocalDateTime now = LocalDateTime.now();
+       DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+       String settime=now.format(df);
 
-        jevent.setEnd_time(settime);
+        jevent.setEnd_time();
         jevent.setActive("NO");
 
         particb.setText("Event ended \n Participants so far\n" + Integer.toString(jevent.getParticipants()));
