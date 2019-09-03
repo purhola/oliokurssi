@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 public class EventActiveActivity extends AppCompatActivity implements Serializable {
 
     private MyDbAdapter helper;
-    private JuvinileEvent jevent;
+    JuvinileEvent jevent;
 
     private Button particb;
 
@@ -79,6 +79,7 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
         helper.updateJuvinileEventDetails(jevent.getEventid(),"active","YES");
         helper.updateJuvinileEventDetails(jevent.getEventid(),"start",settime);
 
+
     }
 
     public void deactivateEvent(View v) {
@@ -98,6 +99,7 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
         //update db
         helper.updateJuvinileEventDetails(jevent.getEventid(),"active","NO");
         helper.updateJuvinileEventDetails(jevent.getEventid(),"end",settime);
+        helper.updateJuvinileEventDetails(jevent.getEventid(),"participants",Integer.toString(jevent.getParticipants()));
 
     }
 
@@ -109,6 +111,7 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
 
         //update db
         helper.updateJuvinileEventDetails(jevent.getEventid(),"active","NO");
+        helper.updateJuvinileEventDetails(jevent.getEventid(),"participants",Integer.toString(jevent.getParticipants()));
 
     }
 

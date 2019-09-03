@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class ViewSingleEventActivity extends AppCompatActivity implements Serializable {
 
     private MyDbAdapter helper;
-    private JuvinileEvent jevent;
+    JuvinileEvent jevent;
 
 
     private TextView tveventplace;
