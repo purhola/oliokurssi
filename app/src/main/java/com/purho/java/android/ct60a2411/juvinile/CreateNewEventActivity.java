@@ -117,7 +117,7 @@ public class CreateNewEventActivity extends AppCompatActivity implements MyRecyc
 
     }
 
-    public void saveEvent(View v) {  //TODO this fails if the fields are initially left empty
+    public void saveEvent(View v) {
 
         //integer which will be set to 1 if required info is missing -> do nothing until ok.
         //if a data is null or empty mark the corresponding textview red

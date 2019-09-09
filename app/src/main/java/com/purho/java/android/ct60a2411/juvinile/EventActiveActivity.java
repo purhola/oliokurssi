@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -78,6 +79,7 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
         //update the db
         helper.updateJuvinileEventDetails(jevent.getEventid(),"active","YES");
         helper.updateJuvinileEventDetails(jevent.getEventid(),"start",settime);
+        Toast.makeText(this, "Event started", Toast.LENGTH_SHORT).show();
 
 
     }
@@ -100,6 +102,7 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
         helper.updateJuvinileEventDetails(jevent.getEventid(),"active","NO");
         helper.updateJuvinileEventDetails(jevent.getEventid(),"end",settime);
         helper.updateJuvinileEventDetails(jevent.getEventid(),"participants",Integer.toString(jevent.getParticipants()));
+        Toast.makeText(this, "Event ended", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -112,6 +115,7 @@ public class EventActiveActivity extends AppCompatActivity implements Serializab
         //update db
         helper.updateJuvinileEventDetails(jevent.getEventid(),"active","NO");
         helper.updateJuvinileEventDetails(jevent.getEventid(),"participants",Integer.toString(jevent.getParticipants()));
+        Toast.makeText(this, "Event paused", Toast.LENGTH_SHORT).show();
 
     }
 

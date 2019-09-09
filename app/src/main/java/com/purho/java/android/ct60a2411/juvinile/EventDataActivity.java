@@ -86,7 +86,7 @@ public class EventDataActivity extends AppCompatActivity implements MyRecyclerVi
 
     //@Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
 
         //new object fo passing the selected event
         JuvinileEvent passEventObject = new JuvinileEvent();

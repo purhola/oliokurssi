@@ -29,11 +29,11 @@ public class AdminToolsActivity extends AppCompatActivity implements MyRecyclerV
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
         System.out.println("ja positiohan on" + position);
-        //TODO how can we get to the line clicked!!! need the id from there at least.. best would be if we could just move to a new place (ylläpito) directly
+
 
     }
 
-    public void testReading(View v) {
+   /* public void testReading(View v) {
         //array for the juviline objects
         ArrayList<Juvinile> juvinileArray = new ArrayList<Juvinile>();
         //temp array for displaying the juviline data
@@ -53,7 +53,7 @@ public class AdminToolsActivity extends AppCompatActivity implements MyRecyclerV
 
         JuvinileEvent jevent= new JuvinileEvent();
 
-        jevent=helper.getSingleEvent(5);
+        //jevent=helper.getSingleEvent(5);
 
         tesArrayFill=jevent.getEventname() +" " + jevent.getEventid() +" "+ jevent.getPlanned_start() +" " + jevent.getPlanned_end();
 
@@ -70,6 +70,8 @@ public class AdminToolsActivity extends AppCompatActivity implements MyRecyclerV
 
     }
 
+
+    */
     public void populateInit(View v) {
 
         String[] juviniledata = new String[3];
@@ -152,13 +154,13 @@ public class AdminToolsActivity extends AppCompatActivity implements MyRecyclerV
         if(id<=0)
         {
             Message.message(getApplicationContext(),"Event Insertion Unsuccessful");
-            System.out.println("EVENT INSERTION UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
+
             //Name.setText("");
             //Pass.setText("");
         } else
         {
             Message.message(getApplicationContext(),"Event Insertion Successful");
-            System.out.println("EVENT INSERTION SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
+
             //Name.setText("");
             //Pass.setText("");
         }

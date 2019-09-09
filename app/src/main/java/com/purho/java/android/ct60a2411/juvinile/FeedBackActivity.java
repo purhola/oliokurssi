@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
 
@@ -46,7 +47,9 @@ public class FeedBackActivity extends AppCompatActivity implements Serializable 
         i.getSerializableExtra("eventObject");
         if (i.getSerializableExtra("eventObject") == null) {
             //jevent = new JuvinileEvent();
-            System.out.println("***************Can't find the event****************"); // TODO this could/should be something smarter, a msg or break or both..
+            System.out.println("***************Can't find the event****************");
+            Toast.makeText(this, "Loading the data failed", Toast.LENGTH_SHORT).show();
+
         } else {
             jevent = (JuvinileEvent) i.getSerializableExtra("eventObject");
         }
@@ -55,8 +58,8 @@ public class FeedBackActivity extends AppCompatActivity implements Serializable 
 
     public void saveFeedBack(View v){
 
-    //TODO save to object, save to db
-    // notify, that feedback is given
+
+
 
         String strfeedback;
         String strgrade;
@@ -86,6 +89,7 @@ public class FeedBackActivity extends AppCompatActivity implements Serializable 
             helper.insertDataFeedback(sqlargs);
             btnsavefeedback.setText("Saved");
             btnsavefeedback.setTextColor(Color.GRAY);
+            Toast.makeText(this, "Feedback saved", Toast.LENGTH_SHORT).show();
         }
         else {
             txtviewgrade.setTextColor(Color.RED);

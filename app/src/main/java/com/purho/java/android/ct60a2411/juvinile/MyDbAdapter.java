@@ -15,12 +15,6 @@ import java.util.ArrayList;
 //note to self: THE DB GOES TO
 // data/data/APP_Name/databases/DATABASE_NAME
 
-//TODO stringsql
-//compileStatement()
-//Compiles an SQL statement into a reusable pre-compiled statement object.
-////Use this method as below
-////compileStatement(String sql)
-//Pass sql statement as a parameter in string the format.
 
 public class MyDbAdapter implements Serializable {
 
@@ -283,75 +277,6 @@ public class MyDbAdapter implements Serializable {
         return eventDataList;
     }
 
-    //  TODO SELECT ONE SINGLE EVENT xxx THIS IS NOT USED ANYMORE
-    public JuvinileEvent getSingleEvent(Integer e_eventid) {
-
-        //Variables for storing the results
-        String[] s_eventid={Integer.toString(e_eventid)};
-
-        //create the query
-        String selectQuery = "SELECT " +
-                myDbHelper.EVENTID + ", " +
-                myDbHelper.TABLE_JUVINILE + "." + myDbHelper.JUVINILEID + ", " +
-                myDbHelper.JUVINILENAME + ", " +
-                myDbHelper.EVENTNAME + ", " +
-                myDbHelper.EVENTPLANNEDSTART + ", " +
-                myDbHelper.EVENTPLANNEDEND + ", " +
-                myDbHelper.MINAGE + ", " +
-                myDbHelper.MAXAGE + ", " +
-                myDbHelper.PARTICIPANTS_COUNT + ", " +
-                myDbHelper.ACTIVE + ", " +
-                myDbHelper.EVENTSTART + ", " +
-                myDbHelper.EVENTEND +
-                " FROM " + myDbHelper.TABLE_JUVINILE + ", " + myDbHelper.TABLE_EVENT +
-                " WHERE " + myDbHelper.TABLE_JUVINILE + "." + myDbHelper.JUVINILEID + " = " + myDbHelper.TABLE_EVENT + "." + myDbHelper.EJUVINILEID +
-                " AND " + myDbHelper.EVENTID + " = ?";
-
-        SQLiteDatabase db = myhelper.getWritableDatabase();
-        Cursor c = db.rawQuery(selectQuery, s_eventid);
-
-        //go through the whole table
-        JuvinileEvent tempevent = null;
-        if (c.moveToFirst()) {
-            do {
-                tempevent = new JuvinileEvent();
-
-                //read the db
-                eventid = c.getInt(c.getColumnIndex(myDbHelper.EVENTID));
-                juvilineid = c.getInt(c.getColumnIndex(myDbHelper.JUVINILEID));
-                juvilinename = c.getString(c.getColumnIndex(myDbHelper.JUVINILENAME));
-                eventname = c.getString(c.getColumnIndex(myDbHelper.EVENTNAME));
-                plannedstarttime = c.getString(c.getColumnIndex(myDbHelper.EVENTPLANNEDSTART));
-                plannedendtime = c.getString(c.getColumnIndex(myDbHelper.EVENTPLANNEDEND));
-                minage = c.getInt(c.getColumnIndex(myDbHelper.MINAGE));
-                maxage = c.getInt(c.getColumnIndex(myDbHelper.MAXAGE));
-                participants = c.getInt(c.getColumnIndex(myDbHelper.PARTICIPANTS_COUNT));
-                active = c.getString(c.getColumnIndex(myDbHelper.ACTIVE));
-                starttime = c.getString(c.getColumnIndex(myDbHelper.EVENTSTART));
-                if(starttime == null) starttime="";
-                endtime = c.getString(c.getColumnIndex(myDbHelper.EVENTEND));
-                if(endtime == null) endtime="";
-
-                //Assign the values to eventdata object
-                tempevent.setEventid(eventid);
-                tempevent.setJuvinileid(juvilineid);
-                tempevent.setJuvinilename(juvilinename);
-                tempevent.setEventname(eventname);
-                tempevent.setPlanned_start(plannedstarttime);
-                tempevent.setPlanned_end(plannedendtime);
-                tempevent.setMinage(minage);
-                tempevent.setMaxage(maxage);
-                tempevent.setParticipants(participants);
-                tempevent.setActive(active);
-                tempevent.setStart_time(starttime);
-                tempevent.setEnd_time(endtime);
-
-
-            } while (c.moveToNext());
-            Log.d("object", "single event");
-        }
-        return tempevent;
-    }
 
     //***********************************************************************************************************************
     //SELECT FEEDBACKS
@@ -411,16 +336,6 @@ public class MyDbAdapter implements Serializable {
 
     //UPDATE
 
-    //update Juvinile data TODO remove the one below, not used
-    public int updateName(String oldText , String newText)
-    {
-        SQLiteDatabase db = myhelper.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(myDbHelper.JUVINILENAME,newText);
-        String[] whereArgs= {oldText};
-        int count =db.update(myDbHelper.TABLE_JUVINILE,contentValues, myDbHelper.JUVINILENAME+" = ?",whereArgs );
-        return count; //paluukoodi jee
-    }
 
     //update Juvinile data
     public void updateJuvinileDetails(Integer juvinileid,String column,String new_value)

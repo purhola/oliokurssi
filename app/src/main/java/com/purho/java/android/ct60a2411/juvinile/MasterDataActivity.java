@@ -102,6 +102,7 @@ public class MasterDataActivity extends AppCompatActivity implements MyRecyclerV
 
             helper.updateJuvinileDetails(juvinileArray.get(arrayposition).getJuvinileID(),"city",juvinilecity.getText().toString());
             helper.updateJuvinileDetails(juvinileArray.get(arrayposition).getJuvinileID(),"address",juvinileaddress.getText().toString());
+            Toast.makeText(this, "Juvinile updated", Toast.LENGTH_SHORT).show();
         }
         else if (juvinilename.getText().toString() != null && !juvinilename.getText().toString().trim().isEmpty() ){
 
@@ -109,14 +110,16 @@ public class MasterDataActivity extends AppCompatActivity implements MyRecyclerV
 
             String[] sqlargs = {juvinilename.getText().toString(), juvinileaddress.getText().toString(), juvinilecity.getText().toString()};
             insertid = helper.insertDataJuvinile(sqlargs);
+            Toast.makeText(this, "New Juvinile saved", Toast.LENGTH_SHORT).show();
 
         }
         else {
             tvName.setTextColor(Color.RED);
             System.out.println("nothing to do");
+            Toast.makeText(this, "Juvinile needs to be select or input", Toast.LENGTH_SHORT).show();
 
         }
-            //TODO this should only be done if either of the previous ones is done
+            //update the data
 
             juvinileArray = helper.getJuvinileList(); // method in dbadapter to fetch upcoming events
 

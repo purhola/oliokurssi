@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
 
@@ -52,7 +53,8 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
         i.getSerializableExtra("eventObject");
         if (i.getSerializableExtra("eventObject") == null) {
             //jevent = new JuvinileEvent();
-            System.out.println("***************Can't find the event****************"); // TODO this could/should be something smarter, a msg or break or both..
+            System.out.println("***************Can't find the event****************");
+            Toast.makeText(this, "Loading the data failed", Toast.LENGTH_SHORT).show();
         } else {
             jevent = (JuvinileEvent) i.getSerializableExtra("eventObject");
         }
@@ -129,8 +131,8 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
         jevent.setParticipants(participants);
 
         long id;
-        //TODO should we make the DB updates from here or from the object itself..
-        //create a message if any fail, also msg if all are saved ok
+
+        //TODO create a message if any fail, also msg if all are saved ok
 
 
         helper.updateJuvinileEventDetails(jevent.getEventid(),"eventname",jevent.getEventname());
@@ -139,7 +141,7 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
         helper.updateJuvinileEventDetails(jevent.getEventid(),"minage", String.valueOf(jevent.getMinage()));
         helper.updateJuvinileEventDetails(jevent.getEventid(),"maxage", String.valueOf(jevent.getMaxage()));
         helper.updateJuvinileEventDetails(jevent.getEventid(),"participants", String.valueOf(jevent.getParticipants()));
-
+        Toast.makeText(this, "Event data updated", Toast.LENGTH_SHORT).show();
         setUpDisplay();
 
 
@@ -152,8 +154,11 @@ public class ViewSingleEventActivity extends AppCompatActivity implements Serial
 
         Intent intent = new Intent(this,EventActiveActivity.class);
         intent.putExtra("passEventObjectLive", jevent);
-        startActivity(intent);}
+        startActivity(intent);
+            Toast.makeText(this, "Event live", Toast.LENGTH_SHORT).show();
+        }
         else realend.setTextColor(Color.RED);
+        Toast.makeText(this, "Event already ended", Toast.LENGTH_SHORT).show();
 
     }
 

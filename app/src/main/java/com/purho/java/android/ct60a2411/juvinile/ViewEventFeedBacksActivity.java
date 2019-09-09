@@ -44,7 +44,8 @@ public class ViewEventFeedBacksActivity extends AppCompatActivity implements MyR
         i.getSerializableExtra("passEventObjectLive");
         if (i.getSerializableExtra("passEventObjectLive") == null) {
 
-            System.out.println("***************Can't find the event****************"); // TODO this could/should be something smarter, a msg or break or both..
+            System.out.println("***************Can't find the event****************");
+            Toast.makeText(this, "Loading the data failed", Toast.LENGTH_SHORT).show();
         } else {
             jevent = (JuvinileEvent) i.getSerializableExtra("passEventObjectLive");
         }
@@ -82,7 +83,7 @@ public class ViewEventFeedBacksActivity extends AppCompatActivity implements MyR
 
 
         /*
-        TODO TBD
+        UPDATING THE FEEDBACK DATA - IMPLEMENTATION CANCELLED DUE TO MORAL REASONS
         juvinilename.setText(juvinileArray.get(position).getName());
         juvinilecity.setText(juvinileArray.get(position).getCity());
         juvinileaddress.setText(juvinileArray.get(position).getAddress());
